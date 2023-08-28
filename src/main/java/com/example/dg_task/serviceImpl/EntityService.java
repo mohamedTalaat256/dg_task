@@ -1,4 +1,4 @@
-package com.example.dg_task.service;
+package com.example.dg_task.serviceImpl;
 
 
 import com.example.dg_task.DTO.EntityDto;
@@ -6,7 +6,9 @@ import com.example.dg_task.entity.TEntity;
 import com.example.dg_task.exceptions.DuplicateRecordException;
 import com.example.dg_task.exceptions.RecordNotFoundException;
 import com.example.dg_task.mapping.DtoToEntity;
+import com.example.dg_task.mapping.EntityToDto;
 import com.example.dg_task.repository.EntityRepository;
+import com.example.dg_task.service.TEntityI;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,13 +17,19 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class EntityService {
+public class EntityService implements TEntityI {
 
     private final EntityRepository entityRepository;
 
 
 
-    public String saveEntities(EntityDto entityDto) {
+    @Override
+    public List<EntityDto> findAllEntities() {
+        return EntityToDto.getEntities(entityRepository.findAll());
+    }
+
+    @Override
+    public String saveEntity(EntityDto entityDto) {
 
         Optional<TEntity> entity = entityRepository.findByName(entityDto.getName());
 
@@ -42,14 +50,15 @@ public class EntityService {
         }
     }
 
+    @Override
     public String updateEntity(Long id,EntityDto entityDto) {
 
-        Optional<TEntity> entity = findById(id);
+        Optional<TEntity> entity = findEntityById(id);
 
         if(!entity.isPresent()){
             throw new RecordNotFoundException("No Entity Found To Update");
         }else{
-           TEntity currentEntity = entity.get();
+            TEntity currentEntity = entity.get();
 
             currentEntity.setName(entityDto.getName());
                     /*.business(entityDto.getBusiness())
@@ -57,23 +66,15 @@ public class EntityService {
                     .addresses(DtoToEntity.getAddresses(entityDto.getAddresses()))
                     .phones(DtoToEntity.getPhones(entityDto.getPhones()))
                     .directors(DtoToEntity.getDirectors(entityDto.getDirectors()))*/
-                    //.build();
+            //.build();
 
             entityRepository.save(currentEntity);
             return "updated success";
         }
     }
 
-
-
-
-    public List<TEntity> allEntities(){
-
-        return entityRepository.findAll();
-    }
-
-    public Optional<TEntity> findById(Long id){
-
+    @Override
+    public Optional<TEntity> findEntityById(Long id) {
         Optional<TEntity> entity = entityRepository.findById(id);
 
         if(!entity.isPresent()){
@@ -83,8 +84,11 @@ public class EntityService {
         }
     }
 
-
-    public void delete(Long id){
+    @Override
+    public void deleteEntityById(Long id){
         entityRepository.deleteById(id);
     }
+
+
+
 }

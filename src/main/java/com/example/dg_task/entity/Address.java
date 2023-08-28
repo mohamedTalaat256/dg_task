@@ -27,7 +27,7 @@ public class Address {
     @Enumerated(EnumType.STRING)
     private CommunicationType addressType;
 
-    @NotNull
+
     @Column(name = "address", length = 100)
     private String address;
 

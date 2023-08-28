@@ -1,16 +1,13 @@
-package com.example.dg_task.service;
+package com.example.dg_task.serviceImpl;
 
 
-import com.example.dg_task.embeded.Email;
 import com.example.dg_task.entity.Person;
-import com.example.dg_task.entity.TEntity;
 import com.example.dg_task.repository.EntityRepository;
 import com.example.dg_task.repository.PersonRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

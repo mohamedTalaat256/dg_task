@@ -36,7 +36,7 @@ public class TEntity {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Address> addresses = new ArrayList<>();
 
-    @OneToMany(mappedBy = "entity", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "entity", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JsonManagedReference
     private List<Person> directors = new ArrayList<>();
 

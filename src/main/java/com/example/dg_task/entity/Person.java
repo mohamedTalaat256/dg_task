@@ -40,12 +40,10 @@ public class Person {
 
 
 
-    @Length(min = 1, max = 100)
+
     @Column(name = "first_name", nullable = false)
     private String firstName;
 
-
-    @Length(min = 1, max = 100)
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
@@ -62,9 +60,6 @@ public class Person {
     private PassportNumber passportNumber;
 
     @Embedded
-    @AttributeOverrides({
-            @AttributeOverride( name = "emailAddress" ,  column = @Column(name = "email_address", length = 255)),
-    })
     private Email email;
 
 

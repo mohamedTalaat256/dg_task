@@ -18,6 +18,9 @@ import java.util.List;
 public class EntityDto {
 
 
+    private Long id;
+
+
     @NotNull
     @Length(min = 1, max = 255)
     private String name;

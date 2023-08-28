@@ -48,21 +48,21 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(InvalidValuesException.class)
     public ResponseEntity<?> handleInvalidValuesException(InvalidValuesException ex) {
+        return  AppResponse.generateResponse(ex.getMessage(), HttpStatus.BAD_REQUEST, null, false);
 
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Invalid Values Exception");
     }
 
     @ExceptionHandler(DuplicateRecordException.class)
     public ResponseEntity<?> handleDuplicateRecordException(DuplicateRecordException ex) {
 
 
-        return  AppResponse.generateResponse("The Name Of The Entity Is Already Exist", HttpStatus.OK, null, true);
+        return  AppResponse.generateResponse(ex.getMessage(), HttpStatus.OK, null, true);
     }
 
     @ExceptionHandler(RecordNotFoundException.class)
     public ResponseEntity<?> handleRecordNotFoundException(RecordNotFoundException ex) {
 
 
-        return  AppResponse.generateResponse("Entity Not Found !", HttpStatus.NOT_FOUND, null, true);
+        return  AppResponse.generateResponse(ex.getMessage(), HttpStatus.NOT_FOUND, null, true);
     }
 }

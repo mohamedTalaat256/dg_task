@@ -1,10 +1,7 @@
 package com.example.dg_task.controller;
 
 
-import com.example.dg_task.entity.TEntity;
-import com.example.dg_task.service.EntityService;
-import com.example.dg_task.service.PersonService;
-import jakarta.validation.Valid;
+import com.example.dg_task.serviceImpl.PersonService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

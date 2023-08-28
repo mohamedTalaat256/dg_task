@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,14 +20,18 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PersonDto {
+
+    private Long id;
     @NotNull
     private Gender gender;
     private String title;
 
     @NotNull
+    @Length(min = 1, max = 100)
     private String firstName;
 
     @NotNull
+    @Length(min = 1, max = 100)
     private String lastName;
 
     @NotNull
