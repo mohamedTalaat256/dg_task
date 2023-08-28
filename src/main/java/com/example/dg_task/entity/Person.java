@@ -7,6 +7,7 @@ import com.example.dg_task.enumeration.Gender;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.envers.Audited;
 import org.hibernate.validator.constraints.Length;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Audited
 public class Person {
 
 

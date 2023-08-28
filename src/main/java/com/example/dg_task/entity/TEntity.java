@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.envers.Audited;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
+@Audited
 public class TEntity {
 
     @Id
