@@ -1,19 +1,16 @@
 package com.example.dg_task.mapping;
 
-import com.example.dg_task.DTO.AddressDto;
-import com.example.dg_task.DTO.PersonDto;
-import com.example.dg_task.DTO.PhoneDto;
-import com.example.dg_task.DTO.RegisterRequestDto;
-import com.example.dg_task.entity.Address;
-import com.example.dg_task.entity.AppUser;
-import com.example.dg_task.entity.Person;
-import com.example.dg_task.entity.Phone;
+import com.example.dg_task.DTO.*;
+import com.example.dg_task.entity.*;
+import com.example.dg_task.repository.RoleRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class DtoToEntity {
 
@@ -82,13 +79,18 @@ public class DtoToEntity {
 
 
 
-    public static AppUser getUser(RegisterRequestDto requestDto){
-
+    public static AppUser getUser(RegisterRequestDto requestDto, Set<Role> roles){
         AppUser user = new AppUser();
+
+
+
+
         user.setEmail(requestDto.getEmail());
         user.setUsername(requestDto.getUsername());
         user.setFullName(requestDto.getFullName());
         user.setPassword(requestDto.getPassword());
+
+        user.setRoles(roles);
 
         user.setAccountNonExpired(true);
         user.setAccountNonLocked(true);
@@ -97,5 +99,7 @@ public class DtoToEntity {
 
         return user;
     }
+
+
 
 }

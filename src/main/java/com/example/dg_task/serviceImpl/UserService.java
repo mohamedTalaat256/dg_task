@@ -3,8 +3,10 @@ package com.example.dg_task.serviceImpl;
 
 import com.example.dg_task.DTO.RegisterRequestDto;
 import com.example.dg_task.entity.AppUser;
+import com.example.dg_task.entity.Role;
 import com.example.dg_task.exceptions.DuplicateRecordException;
 import com.example.dg_task.mapping.DtoToEntity;
+import com.example.dg_task.repository.RoleRepo;
 import com.example.dg_task.repository.UserRepo;
 import com.example.dg_task.security.AppUserDetail;
 import lombok.RequiredArgsConstructor;
@@ -14,14 +16,17 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
 public class UserService implements UserDetailsService {
 
     private final UserRepo userRepo;
+    private final RoleRepo roleRepo;
 
     private final PasswordEncoder passwordEncoder;
 
@@ -38,7 +43,16 @@ public class UserService implements UserDetailsService {
             throw new DuplicateRecordException("This Email is already exist");
         }else{
             requestDto.setPassword(passwordEncoder.encode(requestDto.getPassword()));
-            return userRepo.save(DtoToEntity.getUser(requestDto));
+
+            Set<Role> roles = new HashSet<>();
+
+            for (String roleName: requestDto.getRole()){
+
+                Role role = roleRepo.findRoleByName(roleName);
+                roles.add(role);
+
+            }
+            return userRepo.save(DtoToEntity.getUser(requestDto,roles));
         }
     }
 

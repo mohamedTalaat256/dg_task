@@ -29,8 +29,6 @@ public class JwtTokenUtils {
     public static String generateToken(final String username, final String tokenId , boolean isRefresh) {
 
         log.info("username  >>> " + username + " token id: "+ tokenId+ "# is isRefresh"+ isRefresh);
-
-
         return Jwts.builder()
                 .setId(tokenId)
                 .setSubject(username)

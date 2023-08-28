@@ -61,6 +61,7 @@ public class AuthService {
             userData.put("email", userDetails.getEmail());
             userData.put("fullName", userDetails.getFullName());
             userData.put("userName", userDetails.getUsername());
+            userData.put("roles", userDetails.getAuthorities().toString());
 
 
 
