@@ -1,5 +1,5 @@
 <!-- Sidebar -->
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" [ngClass]="
+<ul class="navbar-nav bg-white sidebar sidebar-wight accordion border-right" [ngClass]="
   { 
     'toggled': !isOpen,
     'nav-opend': isOpen,
@@ -30,11 +30,11 @@
 
   <!-- Heading -->
   <div class="sidebar-heading">
-    Interface
+    Features
   </div>
 
   <!-- Nav Item - Pages Collapse Menu -->
-  <li class="nav-item">
+  <li class="nav-item shadow  m-2 rounded-lg">
     <button class="nav-link " (click)="entitiesIsCollapsed = ! entitiesIsCollapsed"
       [attr.aria-expanded]="entitiesIsCollapsed" aria-controls="collapseExample">
       <div [ngClass]="{'d-flex justify-content-between': isOpen}">
@@ -57,7 +57,7 @@
     </div>
   </li>
 
-  <li class="nav-item">
+  <li class="nav-item shadow m-2 rounded-lg">
     <button class="nav-link" (click)="directorsIsCollapsed = ! directorsIsCollapsed" 
       [attr.aria-expanded]="directorsIsCollapsed" aria-controls="collapseExample">
       <div [ngClass]="{'d-flex justify-content-between': isOpen}">

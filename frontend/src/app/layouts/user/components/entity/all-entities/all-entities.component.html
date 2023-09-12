@@ -41,51 +41,54 @@
     </div>
     
     
-    <table class="table table-bordered">
-        <thead class="">
-            <tr class="text-uppercase">
-                <th>id</th>
-                <th>name</th>
-                <th>commercia lName</th>
-                <th>business</th>
-                <th>phones</th>
-                <th>addresses</th>
-                <th>directors</th>
-                <th>action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let entity of entities;">  
-                <td>{{entity.id}}</td>  
-                <td>{{entity.name}}</td>  
-                <td>{{entity.commercialName}}</td>  
-                <td>{{entity.business}}</td> 
-                <td>
-                    <p *ngFor="let phone of entity.phones;">
-                        {{phone.tphCountryPrefix}}{{phone.tphNumber}}
-                    </p>
-                </td>
-
-                <td>
-                    <div *ngFor="let address of entity.addresses;">
-                        <p>{{address.countryCode}}</p>
-                        {{address.address}} in {{address.city}}
-                    </div>
-                </td>
-                <td>
-                    {{entity.directors.length}} director
-                    <div *ngFor="let person of entity.directors;">
-                        <p>{{person.title}}.{{person.firstName}} {{person.lastName}}</p>
-                    </div>
-                </td>
-                <td>
-                    <a [routerLink]="['/user/entities/',entity.id,'edit' ]" class="btn btn-sm btn-primary p-2 mr-2" ><i class="fa fa-edit"></i></a>
-                    <button class="btn btn-sm btn-danger p-2" (click)="deleteEntity(entity.id)"><i class="fa fa-trash"></i></button>
-                </td> 
-            </tr>  
-        </tbody>
-    </table>
-
+    <div class="rounded-lg shadow">
+        <table class="table  p-3 mb-5 bg-white ">
+            <thead class="">
+                <tr class="text-uppercase">
+                    <th>id</th>
+                    <th>name</th>
+                    <th>commercia lName</th>
+                    <th>business</th>
+                    <th>phones</th>
+                    <th>addresses</th>
+                    <th>directors</th>
+                    <th>action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let entity of entities;">  
+                    <td>{{entity.id}}</td>  
+                    <td>{{entity.name}}</td>  
+                    <td>{{entity.commercialName}}</td>  
+                    <td>{{entity.business}}</td> 
+                    <td>
+                        <p *ngFor="let phone of entity.phones;">
+                            {{phone.tphCountryPrefix}}{{phone.tphNumber}}
+                        </p>
+                    </td>
+    
+                    <td>
+                        <div *ngFor="let address of entity.addresses;">
+                            <p>{{address.countryCode}}</p>
+                            {{address.address}} in {{address.city}}
+                        </div>
+                    </td>
+                    <td>
+                        {{entity.directors.length}} director
+                        <div *ngFor="let person of entity.directors;">
+                            <p>{{person.title}}.{{person.firstName}} {{person.lastName}}</p>
+                        </div>
+                    </td>
+                    <td>
+                        <a [routerLink]="['/user/entities/',entity.id,'edit' ]" class="btn btn-sm btn-primary p-2 mr-2" ><i class="fa fa-edit"></i></a>
+                        <button class="btn btn-sm btn-danger p-2" (click)="deleteEntity(entity.id)"><i class="fa fa-trash"></i></button>
+                    </td> 
+                </tr>  
+            </tbody>
+        </table>
+    
+    </div>
+  
     <div class="row d-flex justify-content-end">
         <div class="col-md-6">
            
