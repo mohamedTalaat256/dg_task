@@ -1,0 +1,14 @@
+.nav-opend{
+    transition: all 0.2s ease-out;
+}
+.nav-close{
+    transition: all 0.2s ease-out;
+}
+
+.rotated-icon{
+    transition: rotate 0.3s ease-in-out;
+}
+
+.rotate-90{
+    rotate:  z 90deg;
+}

@@ -1,0 +1,73 @@
+
+<button class="col-md-6 btn btn-warning" type="button" (click)="openModalAddPhone(content)"> 
+                                    
+    <i class="fa fa-plus"></i>
+    <i class="fa fa-phone"></i>
+</button>
+
+
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">New Friend</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <form #addPhoneForm="ngForm" (ngSubmit)="onSubmit(addPhoneForm)" novalidate>
+            <div class="row">
+                <div class="form-outline mb-4 col-md-12">
+                    <label class="form-label" for="tphContactType">ContactType</label>
+                    <input type="text" name="tphContactType" class="form-control" #tphContactTypeInput="ngModel"
+                        ngModel required />
+                    <span *ngIf="!tphContactTypeInput.valid && tphContactTypeInput.touched"
+                        class="help-block text-danger">invalid
+                        name</span>
+
+                </div>
+
+                <div class="form-outline mb-4 col-md-12">
+                    <label class="form-label" for="tphCommunicationType">CommunicationType</label>
+                    <input type="text" name="tphCommunicationType" class="form-control"
+                        #tphCommunicationTypeInput="ngModel" ngModel required />
+                    <span *ngIf="!tphCommunicationTypeInput.valid && tphCommunicationTypeInput.touched"
+                        class="help-block text-danger">invalid commercial name </span>
+                </div>
+
+                <div class="form-outline mb-4 col-md-12">
+                    <label class="form-label" for="tphCountryPrefix">CountryPrefix</label>
+                    <input type="text" name="tphCountryPrefix" class="form-control" #tphCountryPrefixInput="ngModel"
+                        ngModel required />
+                    <span *ngIf="!tphCountryPrefixInput.valid && tphCountryPrefixInput.touched"
+                        class="help-block text-danger">invalid incorporation numberInput</span>
+                </div>
+
+                <div class="form-outline mb-4  col-md-12">
+                    <label class="form-label" for="business">Number</label>
+                    <input type="text" name="tphNumber" class="form-control" #tphNumberInput="ngModel"
+                        ngModel required />
+                    <span *ngIf="!tphNumberInput.valid && tphNumberInput.touched"
+                        class="help-block text-danger">invalid business information</span>
+                </div>
+
+                <div class="form-outline mb-4  col-md-12">
+                    <label class="form-label" for="tphExtension">Extension</label>
+                    <input type="text" name="tphExtension" class="form-control" #tphExtensionInput="ngModel" ngModel
+                        required />
+                    <span *ngIf="!tphExtensionInput.valid && tphExtensionInput.touched"
+                        class="help-block text-danger">invalid Extension</span>
+                </div>
+
+                <div class="form-outline mb-4  col-md-12">
+                    <label class="form-label" for="comments">comments</label>
+                    <input type="text" name="comments" class="form-control" #commentsInput="ngModel" ngModel />
+                </div>
+            </div>
+
+          <div class=" text-center">
+            <button data-dismiss="modal" class="btn btn-success">add phone <i class="fa fa-plus"></i></button>
+            </div>
+      </form>
+    </div>
+  </ng-template>

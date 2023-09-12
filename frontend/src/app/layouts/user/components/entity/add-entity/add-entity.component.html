@@ -1,0 +1,365 @@
+<div class="p-3">
+    <div class="row  my-3">
+        <div class="col-md-4">
+            <h3 class="">Create New Entity</h3>
+
+        </div>
+        <div class="col-md-4 d-flex justify-content-center">
+            <!--  -->
+        </div>
+        <div class="col-md-4 d-flex justify-content-end">
+            <button class="btn btn-info p-2 mr-2">Back<i class="fa fa-puls"></i>
+            </button>
+        </div>
+    </div>
+
+
+
+    <div class="tab-content mt-5">
+        <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
+            <div *ngIf="hasError" class="alert alert-danger">
+                {{message}}
+            </div>
+
+            <div *ngIf="hasSuucess" class="alert alert-success">
+                {{message}}
+            </div>
+
+            <form (ngSubmit)="onSubmit()" #createEntityForm="ngForm">
+                <!-- basic information -->
+                <div class="card">
+                    <div class="card-header p-3 bg-primary text-light">
+                        <h3>Information</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="form-outline mb-4 col-md-3">
+                                <label class="form-label" for="name">Name</label>
+                                <input type="text" name="name" class="form-control" #nameInput="ngModel" ngModel
+                                    required />
+                                <span *ngIf="!nameInput.valid && nameInput.touched"
+                                    class="help-block text-danger">invalid name</span>
+                            </div>
+
+                            <div class="form-outline mb-4 col-md-3">
+                                <label class="form-label" for="commercialName">commercial name</label>
+                                <input type="text" name="commercialName" class="form-control"
+                                    #commercialNameInput="ngModel" ngModel required />
+                                <span *ngIf="!commercialNameInput.valid && commercialNameInput.touched"
+                                    class="help-block text-danger">invalid commercial name </span>
+                            </div>
+
+                            <div class="form-outline mb-4 col-md-3">
+                                <label class="form-label" for="incorporationNumber">incorporation number</label>
+                                <input type="text" name="incorporationNumber" class="form-control"
+                                    #incorporationNumberInput="ngModel" ngModel required />
+                                <span *ngIf="!incorporationNumberInput.valid && incorporationNumberInput.touched"
+                                    class="help-block text-danger">invalid incorporation numberInput</span>
+                            </div>
+
+                            <div class="form-outline mb-4  col-md-3">
+                                <label class="form-label" for="business">business</label>
+                                <input type="text" name="business" class="form-control" #businessInput="ngModel" ngModel
+                                    required />
+                                <span *ngIf="!businessInput.valid && businessInput.touched"
+                                    class="help-block text-danger">invalid business information</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Phones  -->
+                <div class="card my-2">
+                    <div class="card-header p-3">
+                        <div class="row">
+                            <h3 class="col-md-6">Phones</h3>
+                            <div class="col-md-6 d-flex justify-content-end">
+
+
+                                <button type="button" class="btn btn-warning btn-icon-split"  (click)="openModalAddPhone(phoneModal)">
+                                    <span class="icon text-white-50">
+                                        <i class="fa fa-plus"></i>
+                                    </span>
+                                    <span class="text">
+                                        <i class="fa fa-phone fa-flip-horizontal mr-2"></i>
+                                        phone
+                                    
+
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body text-dark">
+
+                        <table class="table table-bordered text-dark  w-100 font-size-sm ">
+                            <thead class="">
+                                <tr class="text-uppercase">
+                                    <th>ContactType</th>
+                                    <th>CommunicationType</th>
+                                    <th>CountryPrefix</th>
+                                    <th>Number</th>
+                                    <th>Extension</th>
+                                    <th>comments</th>
+                                    <th>action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let phone of phones;">
+                                    <td>{{phone.tphContactType}}</td>
+                                    <td>{{phone.tphCommunicationType}}</td>
+                                    <td>{{phone.tphCountryPrefix}}</td>
+                                    <td>{{phone.tphNumber}}</td>
+                                    <td>{{phone.tphExtension}}</td>
+                                    <td>{{phone.comments}}</td>
+                                    <td>
+                                        <button (click)="deletePhone(phone.tphNumber)" type="button"  class="btn btn-sm btn-danger p-2"><i class="fa fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Address -->
+
+                <div class="card my-2">
+                    <div class="card-header p-3">
+                        <div class="row">
+                            <h3 class="col-md-6">Addresses</h3>
+                            <div class="col-md-6 d-flex justify-content-end">
+                                <button type="button" class="btn btn-danger btn-icon-split"  (click)="openModalAddAddress(AddressModal)">
+                                    <span class="icon text-white-50">
+                                        <i class="fa fa-plus"></i>
+                                    </span>
+                                    <span class="text">
+                                        <i class="fa fa-map-marker fa-flip-horizontal mr-2"></i>
+                                        address
+                                    
+
+                                    </span>
+                                </button>
+                               
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+
+                        <table class="table table-bordered w-100 font-size-sm ">
+                            <thead class="">
+                                <tr class="text-uppercase">
+                                    <th>addressType</th>
+                                    <th>address</th>
+                                    <th>town</th>
+                                    <th>city</th>
+                                    <th>zip</th>
+                                    <th>countryCode</th>
+                                    <th>state</th>
+                                    <th>comments</th>
+                                    <th>action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let address of addresses;">
+                                    <td>{{address.addressType}}</td>
+                                    <td>{{address.address}}</td>
+                                    <td>{{address.town}}</td>
+                                    <td>{{address.city}}</td>
+                                    <td>{{address.zip}}</td>
+                                    <td>{{address.countryCode}}</td>
+                                    <td>{{address.state}}</td>
+                                    <td>{{address.comments}}</td>
+                                    <td>
+                                        <button (click)="deleteAddress(address.address, address.city)" type="button"  class="btn btn-sm btn-danger p-2"><i class="fa fa-trash"></i></button>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+                <div *ngIf="isLoading" class="d-flex justify-content-center">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+
+
+                <div class="d-flex justify-content-center row  ">
+                    <button [disabled]="!createEntityForm.valid" type="submit" class=" col-md-2 btn btn-primary mb-3">save</button>
+
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- add phone modal -->
+
+<ng-template #phoneModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Add New Phone</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form #addPhoneForm="ngForm" (ngSubmit)="addPhone(addPhoneForm)" novalidate>
+            <div class="row">
+                <div class="form-outline mb-4 col-md-12">
+                    <label class="form-label" for="tphContactType">ContactType</label>
+                    <select name="tphContactType" class="form-control form-select" #tphContactTypeInput="ngModel"
+                        ngModel required>
+
+
+                        <option *ngFor="let item of contactTypes;" [value]="item.key">{{item.value}}</option>
+                    </select>
+                    <span *ngIf="!tphContactTypeInput.valid && tphContactTypeInput.touched" class="help-block text-danger">invalid Contact Type</span>
+                </div>
+
+                <div class="form-outline mb-4 col-md-12">
+                    <label class="form-label" for="tphCommunicationType">CommunicationType</label>
+
+
+                    <select name="tphCommunicationType" class="form-control form-select"
+                        #tphCommunicationTypeInput="ngModel" ngModel required>
+                        <option *ngFor="let item of communicationType;" [value]="item.key">{{item.value}}</option>
+
+                    </select>
+
+                    <span *ngIf="!tphCommunicationTypeInput.valid && tphCommunicationTypeInput.touched"
+                        class="help-block text-danger">invalid commercial name </span>
+                </div>
+
+                <div class="form-outline mb-4 col-md-12">
+                    <label class="form-label" for="tphCountryPrefix">CountryPrefix</label>
+                    <input type="text" name="tphCountryPrefix" class="form-control" #tphCountryPrefixInput="ngModel"
+                        ngModel required />
+                    <span *ngIf="!tphCountryPrefixInput.valid && tphCountryPrefixInput.touched"
+                        class="help-block text-danger">invalid incorporation numberInput</span>
+                </div>
+
+                <div class="form-outline mb-4  col-md-12">
+                    <label class="form-label" for="business">Number</label>
+                    <input type="text" name="tphNumber" class="form-control" #tphNumberInput="ngModel" ngModel
+                        required />
+                    <span *ngIf="!tphNumberInput.valid && tphNumberInput.touched" class="help-block text-danger">invalid
+                        business information</span>
+                </div>
+
+                <div class="form-outline mb-4  col-md-12">
+                    <label class="form-label" for="tphExtension">Extension</label>
+                    <input type="text" name="tphExtension" class="form-control" #tphExtensionInput="ngModel" ngModel
+                        required />
+                    <span *ngIf="!tphExtensionInput.valid && tphExtensionInput.touched"
+                        class="help-block text-danger">invalid Extension</span>
+                </div>
+
+                <div class="form-outline mb-4  col-md-12">
+                    <label class="form-label" for="comments">comments</label>
+                    <input type="text" name="comments" class="form-control" #commentsInput="ngModel" ngModel />
+                </div>
+            </div>
+
+            <div class=" text-center">
+                <button data-dismiss="modal" class="btn btn-success">add phone <i class="fa fa-plus"></i></button>
+            </div>
+        </form>
+    </div>
+</ng-template>
+
+<!-- add Address modal -->
+
+
+<ng-template #AddressModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Add New Address</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form #addAddressForm="ngForm" (ngSubmit)="addAddress(addAddressForm)" novalidate>
+            <div class="row">
+
+
+                <div class="form-outline mb-4 col-md-12">
+                    <label class="form-label" for="addressType">addressType</label>
+                    <select name="addressType" class="form-control form-select" #addressTypeInput="ngModel" ngModel
+                        required>
+                        <option *ngFor="let item of communicationType;" [value]="item.key">{{item.value}}</option>
+
+                    </select>
+
+                    <span *ngIf="!addressTypeInput.valid && addressTypeInput.touched"
+                        class="help-block text-danger">invalid addressTypeInput </span>
+                </div>
+
+                <div class="form-outline mb-4 col-md-12">
+                    <label class="form-label" for="address">address</label>
+                    <input type="text" name="address" class="form-control" #addressInput="ngModel" ngModel required />
+                    <span *ngIf="!addressInput.valid && addressInput.touched" class="help-block text-danger">invalid
+                        address</span>
+                </div>
+
+                <div class="form-outline mb-4  col-md-12">
+                    <label class="form-label" for="town">town</label>
+                    <input type="text" name="town" class="form-control" #townInput="ngModel" ngModel required />
+                    <span *ngIf="!townInput.valid && townInput.touched" class="help-block text-danger">invalid
+                        town</span>
+                </div>
+
+                <div class="form-outline mb-4  col-md-12">
+                    <label class="form-label" for="city">city</label>
+                    <input type="text" name="city" class="form-control" #cityInput="ngModel" ngModel required />
+                    <span *ngIf="!cityInput.valid && cityInput.touched" class="help-block text-danger">invalid
+                        city</span>
+                </div>
+
+                <div class="form-outline mb-4  col-md-12">
+                    <label class="form-label" for="zip">zip</label>
+                    <input type="text" name="zip" class="form-control" #zipInput="ngModel" ngModel required />
+                    <span *ngIf="!zipInput.valid && zipInput.touched" class="help-block text-danger">invalid zip</span>
+
+                </div>
+
+                <div class="form-outline mb-4 col-md-12">
+                    <label class="form-label" for="countryCode">countryCode</label>
+                    <select name="countryCode" class="form-control form-select" #countryCodeInput="ngModel" ngModel
+                        required>
+                        <option *ngFor="let item of countriesCodes;" [value]="item.key">{{item.value}}</option>
+                    </select>
+                    <span *ngIf="!countryCodeInput.valid && countryCodeInput.touched"
+                        class="help-block text-danger">invalid country Code</span>
+                </div>
+
+
+
+                <div class="form-outline mb-4  col-md-12">
+                    <label class="form-label" for="state">state</label>
+                    <input type="text" name="state" class="form-control" #stateInput="ngModel" ngModel required />
+                    <span *ngIf="!stateInput.valid && stateInput.touched" class="help-block text-danger">invalid
+                        state</span>
+
+                </div>
+
+
+
+                <div class="form-outline mb-4  col-md-12">
+                    <label class="form-label" for="comments">comments</label>
+                    <input type="text" name="comments" class="form-control" #commentsInput="ngModel" ngModel />
+                </div>
+            </div>
+
+            <div class=" text-center">
+                <button data-dismiss="modal" class="btn btn-success">add address <i class="fa fa-plus"></i></button>
+            </div>
+        </form>
+    </div>
+</ng-template>
