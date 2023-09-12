@@ -2,12 +2,19 @@ package com.example.dg_task.controller;
 
 
 import com.example.dg_task.DTO.EntityDto;
+import com.example.dg_task.DTO.Pair;
+import com.example.dg_task.enumeration.CommunicationType;
+import com.example.dg_task.enumeration.ContactType;
 import com.example.dg_task.serviceImpl.EntityService;
 import com.example.dg_task.utilis.AppResponse;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 @RestController
