@@ -1,4 +1,4 @@
-package com.example.demo.DTO;
+package com.example.dg_task.DTO;
 
 
 import lombok.Getter;
