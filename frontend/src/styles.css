@@ -5,3 +5,7 @@
 .modal-backdrop.show{
     z-index: 999 !important;
 }
+
+.min-height-600{
+    min-height: 600px;
+}

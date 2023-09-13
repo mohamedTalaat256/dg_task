@@ -19,7 +19,7 @@ export class AllEntitiesComponent implements OnInit {
 
 
   pageNum: number = 0;
-  pageSize: number = 5;
+  pageSize: number = 1;
 
 
   totalPages: number = 0;
@@ -78,11 +78,13 @@ export class AllEntitiesComponent implements OnInit {
     this.getEntities(pNum, this.pageSize);
   }
 
-  getPage(pNum) {
-    if (pNum <= 0) {
-      return;
-    }
+  
+  changePageSize(pSize: number) {
+    this.pageSize = pSize;
+    this.getEntities(this.pageNum, pSize);
+  }
 
+  getPage(pNum) {
     if (pNum > this.totalPages) {
       return;
     }
