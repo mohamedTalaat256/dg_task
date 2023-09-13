@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Entity } from 'src/app/model/entity.model';
 import { EntityService } from 'src/app/service/entity.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'all-entities',
@@ -9,12 +10,12 @@ import { EntityService } from 'src/app/service/entity.service';
 })
 export class AllEntitiesComponent implements OnInit {
 
-  hasError: boolean = false;
-  hasSuucess: boolean = false;
-  message: string='';
+  searchText: string;
 
 
-  constructor(private entityService: EntityService) { }
+  constructor(
+    private toastr: ToastrService,
+    private entityService: EntityService) { }
 
 
   pageNum: number = 0;
@@ -39,18 +40,30 @@ export class AllEntitiesComponent implements OnInit {
   }
 
 
+  searchEntities() {
+    if(this.searchText==''){
+      this.getEntities(this.pageNum, this.pageSize);
+    }
+    this.entityService.searchEntity(this.searchText).subscribe(
+      response => {
+        this.entities = response.data;
+      }
+    );
+  }
+
+
   deleteEntity(entityId: number) {
     
     if(confirm('are you sure to delete this record')){
       this.entityService.delete(entityId).subscribe(
         response => {
           if(response.success){
-            this.hasSuucess = true;
-            this.message = response.message;
+
+            this.toastr.success(response.message);
+            
             this.entities = this.entities.filter(entity=> entity.id !== entityId);
           }else{
-            this.hasError = true;
-            this.message = 'fail to delete';
+            this.toastr.error('fail to delete');
           }
         
         }

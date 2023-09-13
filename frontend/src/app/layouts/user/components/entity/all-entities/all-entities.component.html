@@ -11,8 +11,7 @@
         <div class="col-md-4 d-flex justify-content-center">
             <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 w-100 navbar-search">
                 <div class="input-group">
-                  <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search"
-                    aria-describedby="basic-addon2">
+                  <input type="text" [(ngModel)]="searchText" (keyup)="searchEntities()" name="searchText" class="form-control bg-light border-0 small" placeholder="Search for entity"  >
                   <div class="input-group-append">
                     <button class="btn btn-primary" type="button">
                       <i class="fas fa-search fa-sm"></i>
@@ -25,19 +24,6 @@
             <button routerLink="/user/entities/add" class="btn btn-success p-2 mr-2">New Entity<i class="fa fa-puls"></i>
             </button>
         </div>
-
-
-
-
-
-        
-            <div *ngIf="hasError" class="alert alert-danger">
-                {{message}}
-            </div>
-    
-            <div *ngIf="hasSuucess" class="alert alert-success">
-                {{message}}
-            </div>
     </div>
     
     

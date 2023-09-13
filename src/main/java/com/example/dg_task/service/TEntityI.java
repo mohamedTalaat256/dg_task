@@ -4,6 +4,7 @@ import com.example.dg_task.DTO.EntityDto;
 import com.example.dg_task.entity.TEntity;
 import org.springframework.data.domain.Page;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface TEntityI {
@@ -15,6 +16,7 @@ public interface TEntityI {
     String updateEntity(Long id,EntityDto entityDto);
 
     Page<EntityDto> findAllEntities(int pageNum, int pageSize);
+    List<EntityDto> findEntityByNameContains(String name);
 
 
     void deleteEntityById(Long id);

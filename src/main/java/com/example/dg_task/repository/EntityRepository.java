@@ -18,5 +18,6 @@ public interface EntityRepository extends JpaRepository<TEntity, Long> {
      List<TEntity> findAll();
 
      Page<TEntity> findAll(Pageable page);
+     List<TEntity> findByNameContains(String name);
      Optional<TEntity> findByName(String name);
 }

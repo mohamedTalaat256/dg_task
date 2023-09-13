@@ -60,7 +60,7 @@ public class AuthService {
             userData.put("id", userDetails.getId().toString());
             userData.put("email", userDetails.getEmail());
             userData.put("fullName", userDetails.getFullName());
-            userData.put("userName", userDetails.getUsername());
+            userData.put("username", userDetails.getUsername());
             userData.put("roles", userDetails.getAuthorities().toString());
 
 

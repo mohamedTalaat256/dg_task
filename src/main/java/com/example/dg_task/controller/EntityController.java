@@ -38,6 +38,11 @@ public class EntityController {
         return AppResponse.generateResponse("entity found", HttpStatus.OK, entityService.findEntityById(id), true);
     }
 
+    @GetMapping("/entities/search/{name}")
+    public ResponseEntity<Object> findByNameContains(@PathVariable String name){
+        return AppResponse.generateResponse("entity found", HttpStatus.OK, entityService.findEntityByNameContains(name), true);
+    }
+
     @PostMapping("/entities")
     public ResponseEntity<Object> saveEntity(@RequestBody @Valid EntityDto request){
         return AppResponse.generateResponse(entityService.saveEntity(request), HttpStatus.OK, null, true);

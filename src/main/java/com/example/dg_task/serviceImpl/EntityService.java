@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -85,6 +86,15 @@ public class EntityService implements TEntityI {
             return entity;
         }
     }
+
+
+    @Override
+    public List<EntityDto> findEntityByNameContains(String name) {
+        List<TEntity> tEntityList = entityRepository.findByNameContains(name);
+
+        return  EntityToDto.getEntities(tEntityList);
+    }
+
 
     @Override
     public void deleteEntityById(Long id){
