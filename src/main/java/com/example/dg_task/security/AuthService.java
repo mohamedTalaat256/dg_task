@@ -126,8 +126,14 @@ public class AuthService {
     }
 
     public void logoutUser(String refreshToken) {
+
+        log.info("begin logoutUser()");
+
         Optional<TokenInfo> tokenInfo = tokenInfoService.findByRefreshToken(refreshToken);
         if (tokenInfo.isPresent()) {
+
+            log.info("User loged Out");
+
             tokenInfoService.deleteById(tokenInfo.get().getId());
         }
     }

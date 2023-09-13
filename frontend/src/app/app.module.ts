@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './layouts/user/components/global/header/header.component';
 
 import { SideNavbarComponent } from './layouts/user/components/global/side-navbar/side-navbar.component';
@@ -28,6 +28,8 @@ import { AddPhoneModalComponent } from './layouts/user/components/global/add-pho
 import { EditEntityComponent } from './layouts/user/components/entity/edit-entity/edit-entity.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AuthInterceptor } from './service/auth.interceptor';
+
+import { provideToastr } from 'ngx-toastr';
 
 
 @NgModule({
@@ -57,7 +59,9 @@ import { AuthInterceptor } from './service/auth.interceptor';
             provide: HTTP_INTERCEPTORS,
             useClass:AuthInterceptor,
             multi: true
-        }
+        },
+        provideAnimations(), // required animations providers
+        provideToastr(), // Toastr providers
     ],
     bootstrap: [AppComponent],
     imports: [
@@ -71,7 +75,7 @@ import { AuthInterceptor } from './service/auth.interceptor';
         NgbCollapseModule,
         NgbModule,
         FormsModule,
-	    NgbDatepickerModule,
+	    NgbDatepickerModule
     ]
 })
 export class AppModule {}

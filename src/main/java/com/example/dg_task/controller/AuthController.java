@@ -43,8 +43,10 @@ public class AuthController {
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<?> logout(@RequestParam String refreshToken) {
+    public ResponseEntity<Object> logout(@RequestParam String refreshToken) {
         authService.logoutUser(refreshToken);
-        return ResponseEntity.ok(null);
+
+        return AppResponse.generateResponse("logout success", HttpStatus.OK, null, true);
+
     }
 }

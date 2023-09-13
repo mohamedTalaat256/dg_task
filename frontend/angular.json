@@ -29,14 +29,11 @@
               "src/styles.css",
               "src/assets/css/admin.min.css",
               "src/assets/css/fontawesome-free/css/all.min.css",
-              "./node_modules/bootstrap/dist/css/bootstrap.min.css"
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/ngx-toastr/toastr.css" 
             ],
             "scripts": [
-              "./node_modules/jquery/dist/jquery.min.js",
-              "./node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
-              "src/assets/js/jquery.easing.min.js",
-              "src/assets/js/admin.min.js"
+
 
 
             ]

@@ -15,15 +15,12 @@ export class AuthInterceptor implements HttpInterceptor{
      
         const accessToken = this.authService.GetToken();
 
-        console.log(accessToken);
-
         if(accessToken != ''){
             const cloned = req.clone({
                 setHeaders: {
                     Authorization: 'bearer '+accessToken,
                     'content-type': 'application/json'
                   }
-              /*   headers: req.headers.set(" Authorization",  'bearer '+ accessToken) */
             });
 
             return next.handle(cloned);

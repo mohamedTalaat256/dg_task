@@ -3,7 +3,7 @@ export class Register{
         public email: string,
         public username: string,
         public fullName: string,
-        public password: number,
+        public password: string,
         public role: string[],
         
         ){}

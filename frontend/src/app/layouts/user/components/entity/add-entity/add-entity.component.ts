@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Address } from 'src/app/model/address.model';
 import { Phone } from 'src/app/model/phone.model';
@@ -7,6 +7,7 @@ import { EntityService } from 'src/app/service/entity.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SelectOprionService } from 'src/app/service/selectOprion.service';
 import { Pair } from 'src/app/model/pair.model';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -20,11 +21,9 @@ export class AddEntityComponent implements OnInit {
 
   payload: EntitySaveRequest;
   isLoading: boolean = false;
-  hasError: boolean = false;
-  hasSuucess: boolean = false;
-  message: string;
 
   constructor(
+    private toastr: ToastrService ,
     private selectOptionsService :SelectOprionService,
     private entityService: EntityService, 
     private modalService: NgbModal) { }
@@ -91,15 +90,17 @@ export class AddEntityComponent implements OnInit {
 
 
   this.entityService.save(this.payload)
-      .subscribe((response:any) => {
-        if(!response.message){
-          this.isLoading = false;
-          this.hasError = true;
-        }else{
-          this.hasSuucess = true;
-          this.isLoading = false;
-        }
-        this.message = response.message;
+      .subscribe(
+        {
+          next:(response)=>{
+            this.isLoading = false;
+            this.toastr.success(response.message);
+
+          },error:(error)=>{
+            this.isLoading = false;
+            this.toastr.error(error.error.message);
+
+          }
       });
 
   }
@@ -143,8 +144,6 @@ export class AddEntityComponent implements OnInit {
   openModalAddPhone(content) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
   }
-
-  
   openModalAddAddress(content) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
   }

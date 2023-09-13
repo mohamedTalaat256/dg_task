@@ -1,9 +1,9 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Login } from 'src/app/model/login.model';
 import { AuthService } from 'src/app/service/auth.service';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -12,32 +12,34 @@ import { AuthService } from 'src/app/service/auth.service';
 export class LoginComponent {
 
   isLoading: boolean = false;
-  hasError: boolean = false;
   errorMessage: string;
 
 
 
-  constructor(private authservise: AuthService, private route: Router) { }
+  constructor(private toastr: ToastrService ,private authservise: AuthService, private route: Router) { }
   @ViewChild('loginForm') loginform: NgForm;
 
   onSubmit() {
     this.isLoading = true;
 
     this.authservise.login(new Login(this.loginform.value.username, this.loginform.value.password))
-      .subscribe(response => {
+      .subscribe( {
+        next:(response)=>{
+          this.isLoading = false;
+          this.toastr.success('Welcome '+response.data.userData.fullName);
 
-        this.isLoading = false;
+          
+          localStorage.setItem('accessToken', response.data.accessToken);
+          localStorage.setItem('refreshToken', response.data.refreshToken);
+          localStorage.setItem('user',JSON.stringify(response.data.userData, null, 2) );
+          
+          this.route.navigate(['/user/dashboard']);
+        },
+        error:(error)=>{
+          this.isLoading = false;
 
-        console.log(response);
-        localStorage.setItem('accessToken', response.data.accessToken);
-        this.route.navigate(['/user/dashboard']);
-
-      }, error => {
-        
-        this.isLoading = false;
-
-        this.hasError = true;
-        this.errorMessage = error.error.message;
+          this.toastr.error(error.error.message);
+        }
       }
       );
 

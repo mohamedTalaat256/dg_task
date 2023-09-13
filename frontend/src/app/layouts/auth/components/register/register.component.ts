@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Register } from 'src/app/model/register.model';
 import { AuthService } from 'src/app/service/auth.service';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -12,39 +12,60 @@ import { AuthService } from 'src/app/service/auth.service';
 export class RegisterComponent {
 
   isLoading: boolean = false;
-  hasError: boolean = false;
-  hasSuucess: boolean = false;
-  message: string;
+  roles: string[] = [];
 
 
 
-  constructor(private authservise: AuthService, private route: Router) { }
+  constructor(private toastr: ToastrService ,private authservise: AuthService, private route: Router) { }
 
   @ViewChild('registerForm') registerForm: NgForm;
 
-  onSubmit(){
+  onSubmit() {
     this.isLoading = true;
+    
 
     this.authservise.register(new Register(
       this.registerForm.value.email,
       this.registerForm.value.username,
       this.registerForm.value.fullName,
       this.registerForm.value.password,
-      ["ADMIN"]
+      this.roles
     ))
-    .subscribe(response => {
-    
-      this.hasSuucess = true;
-      this.isLoading = false;
-      this.message = response.message;
-    }, error => {
-      
-      this.isLoading = false;
+      .subscribe(
+        {
+          next: (response) => {
 
-      this.hasError = true;
-      this.message = error.error.message;
+           
+            this.isLoading = false;
+            this.toastr.success(response.message);
+          }, error: (error) => {
+
+            this.isLoading = false;
+            this.toastr.error(error.error.message);
+
+            
+          }
+        }
+      );
+
+  }
+
+
+
+
+  handleRoleChange(event) {
+    // if not found add it
+    // if found remove it
+
+    const role: string = event.target.name;
+    if (!this.roles.includes(role)) {
+      this.roles.push(role);
+    } else {
+      const index = this.roles.indexOf(role);
+      if (index !== -1) {
+        this.roles.splice(index, 1);
+      }
     }
-    );
 
   }
 }
