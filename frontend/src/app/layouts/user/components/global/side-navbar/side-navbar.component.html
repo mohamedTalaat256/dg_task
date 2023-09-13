@@ -73,8 +73,8 @@
     <div #collapse="ngbCollapse" [(ngbCollapse)]="!directorsIsCollapsed">
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">directors:</h6>
-        <a class="collapse-item" href="buttons.html">All Directors</a>
-        <a class="collapse-item" href="cards.html">Add Director</a>
+        <a class="collapse-item" routerLink="/user/directors/add" >All Directors</a>
+        <a class="collapse-item" routerLink="/user/directors/add" routerLinkActive="active">Add Director</a>
       </div>
     </div>
   </li>

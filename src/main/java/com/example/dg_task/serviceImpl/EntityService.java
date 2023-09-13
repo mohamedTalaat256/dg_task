@@ -23,15 +23,22 @@ public class EntityService implements TEntityI {
 
     private final EntityRepository entityRepository;
     private final DtoToEntity dtoToEntity;
+    private final EntityToDto entityToDto;
 
 
     @Override
     public Page<EntityDto> findAllEntities(int pageNum, int pageSize) {
         Pageable page = PageRequest.of(pageNum, pageSize, Sort.by(Sort.Direction.ASC, "id"));
 
-        List<EntityDto> entityDtos = EntityToDto.getEntities(entityRepository.findAll( page).getContent());
-        int size = entityDtos.size();
-        return new PageImpl<>(entityDtos ,page,size);
+       return entityRepository.findAll( page).map(entity-> new EntityDto(
+               entity.getId(),
+               entity.getName(),
+               entity.getCommercialName(),
+               entity.getBusiness(),
+               entityToDto.getPhonesDto(entity.getPhones()),
+               entityToDto.getAddressesDto(entity.getAddresses()),
+               entityToDto.getDirectors(entity.getDirectors())
+       ));
     }
 
     @Override
@@ -92,7 +99,7 @@ public class EntityService implements TEntityI {
     public List<EntityDto> findEntityByNameContains(String name) {
         List<TEntity> tEntityList = entityRepository.findByNameContains(name);
 
-        return  EntityToDto.getEntities(tEntityList);
+        return  entityToDto.getEntities(tEntityList);
     }
 
 

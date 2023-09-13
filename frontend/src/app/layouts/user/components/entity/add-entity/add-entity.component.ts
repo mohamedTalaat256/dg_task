@@ -16,7 +16,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./add-entity.component.css']
 })
 export class AddEntityComponent implements OnInit {
-[x: string]: any;
+  [x: string]: any;
 
 
   payload: EntitySaveRequest;

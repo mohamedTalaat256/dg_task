@@ -8,13 +8,19 @@ import com.example.dg_task.entity.Address;
 import com.example.dg_task.entity.Person;
 import com.example.dg_task.entity.Phone;
 import com.example.dg_task.entity.TEntity;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+
+@RequiredArgsConstructor
+@Service
+
 public class EntityToDto {
 
-    public static List<PhoneDto> getPhonesDto(List<Phone> phones){
+    public List<PhoneDto> getPhonesDto(List<Phone> phones){
         List<PhoneDto> phonesDtoList = new ArrayList<>();
 
         for (Phone item: phones) {
@@ -30,7 +36,7 @@ public class EntityToDto {
 
         return phonesDtoList;
     }
-    public static List<AddressDto> getAddressesDto(List<Address> addressList){
+    public List<AddressDto> getAddressesDto(List<Address> addressList){
         List<AddressDto> addressesDtoList = new ArrayList<>();
 
         for (Address item: addressList) {
@@ -48,7 +54,7 @@ public class EntityToDto {
 
         return addressesDtoList;
     }
-    public static List<PersonDto> getDirectors(List<Person> personList ){
+    public List<PersonDto> getDirectors(List<Person> personList ){
         List<PersonDto> personDtoList = new ArrayList<>();
 
         for (Person item: personList) {
@@ -73,7 +79,7 @@ public class EntityToDto {
     }
 
 
-    public static List<EntityDto> getEntities(List<TEntity> tEntityList){
+    public List<EntityDto> getEntities(List<TEntity> tEntityList){
         List<EntityDto> entityDtoList = new ArrayList<>();
 
         for (TEntity item : tEntityList){

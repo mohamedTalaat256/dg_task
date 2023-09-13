@@ -7,6 +7,7 @@ import { AddEntityComponent } from './components/entity/add-entity/add-entity.co
 import { AddPhoneModalComponent } from './components/global/add-phone-modal/add-phone-modal.component';
 import { EditEntityComponent } from './components/entity/edit-entity/edit-entity.component';
 import { PageNotFoundComponent } from 'src/app/page-not-found/page-not-found.component';
+import { AddDirectorComponent } from './components/director/add-director/add-director.component';
 
 
 const routes: Routes = [
@@ -15,9 +16,18 @@ const routes: Routes = [
     component: UserComponent,
     children: [
       {path:'dashboard', component: DashboardComponent},
+
+
+      /* entities */
       {path:'entities', component: AllEntitiesComponent},
       {path:'entities/add', component: AddEntityComponent},
       {path:'entities/:id/edit', component: EditEntityComponent},
+
+
+      /* directors */
+      {path:'directors', component: AllEntitiesComponent},
+      {path:'directors/add', component: AddDirectorComponent},
+      {path:'directors/:id/edit', component: EditEntityComponent},
 
 
       { path: '404',  component: PageNotFoundComponent },
