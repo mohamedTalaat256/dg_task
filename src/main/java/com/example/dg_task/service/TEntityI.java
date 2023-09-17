@@ -16,7 +16,7 @@ public interface TEntityI {
     String updateEntity(Long id,EntityDto entityDto);
 
     Page<EntityDto> findAllEntities(int pageNum, int pageSize);
-    List<EntityDto> findEntityByNameContains(String name);
+    List<EntityDto> findEntityByNameContainsOrCommercialNameContains(String name,String commercialName);
 
 
     void deleteEntityById(Long id);

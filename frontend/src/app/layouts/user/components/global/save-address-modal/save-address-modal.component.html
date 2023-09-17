@@ -1,0 +1,98 @@
+<button type="button" class="btn btn-danger btn-icon-split" (click)="openSaveAddressModal(AddressModal)">
+    <span class="icon text-white-50">
+        <i class="fa fa-plus"></i>
+    </span>
+    <span class="text">
+        <i class="fa fa-map-marker fa-flip-horizontal mr-2"></i>address
+    </span>
+</button>
+
+
+
+
+<ng-template #AddressModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Add New Address</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form #saveAddressForm="ngForm" (ngSubmit)="saveAddress(saveAddressForm)" novalidate>
+            <div class="row">
+
+
+                <div class="form-outline mb-4 col-md-12">
+                    <label class="form-label" for="addressType">addressType</label>
+                    <select name="addressType" class="form-control form-select" #addressTypeInput="ngModel" ngModel
+                        required>
+                        <option *ngFor="let item of communicationType;" [value]="item.key">{{item.value}}</option>
+
+                    </select>
+
+                    <span *ngIf="!addressTypeInput.valid && addressTypeInput.touched"
+                        class="help-block text-danger">invalid addressTypeInput </span>
+                </div>
+
+                <div class="form-outline mb-4 col-md-12">
+                    <label class="form-label" for="address">address</label>
+                    <input type="text" name="address" class="form-control" #addressInput="ngModel" ngModel required />
+                    <span *ngIf="!addressInput.valid && addressInput.touched" class="help-block text-danger">invalid
+                        address</span>
+                </div>
+
+                <div class="form-outline mb-4  col-md-12">
+                    <label class="form-label" for="town">town</label>
+                    <input type="text" name="town" class="form-control" #townInput="ngModel" ngModel required />
+                    <span *ngIf="!townInput.valid && townInput.touched" class="help-block text-danger">invalid
+                        town</span>
+                </div>
+
+                <div class="form-outline mb-4  col-md-12">
+                    <label class="form-label" for="city">city</label>
+                    <input type="text" name="city" class="form-control" #cityInput="ngModel" ngModel required />
+                    <span *ngIf="!cityInput.valid && cityInput.touched" class="help-block text-danger">invalid
+                        city</span>
+                </div>
+
+                <div class="form-outline mb-4  col-md-12">
+                    <label class="form-label" for="zip">zip</label>
+                    <input type="text" name="zip" class="form-control" #zipInput="ngModel" ngModel required />
+                    <span *ngIf="!zipInput.valid && zipInput.touched" class="help-block text-danger">invalid zip</span>
+
+                </div>
+
+                <div class="form-outline mb-4 col-md-12">
+                    <label class="form-label" for="countryCode">countryCode</label>
+                    <select name="countryCode" class="form-control form-select" #countryCodeInput="ngModel" ngModel
+                        required>
+                        <option *ngFor="let item of countriesCodes;" [value]="item.key">{{item.value}}</option>
+                    </select>
+                    <span *ngIf="!countryCodeInput.valid && countryCodeInput.touched"
+                        class="help-block text-danger">invalid country Code</span>
+                </div>
+
+
+
+                <div class="form-outline mb-4  col-md-12">
+                    <label class="form-label" for="state">state</label>
+                    <input type="text" name="state" class="form-control" #stateInput="ngModel" ngModel required />
+                    <span *ngIf="!stateInput.valid && stateInput.touched" class="help-block text-danger">invalid
+                        state</span>
+
+                </div>
+
+
+
+                <div class="form-outline mb-4  col-md-12">
+                    <label class="form-label" for="comments">comments</label>
+                    <input type="text" name="comments" class="form-control" #commentsInput="ngModel" ngModel />
+                </div>
+            </div>
+
+            <div class=" text-center">
+                <button data-dismiss="modal" class="btn btn-success">add address <i class="fa fa-plus"></i></button>
+            </div>
+        </form>
+    </div>
+</ng-template>

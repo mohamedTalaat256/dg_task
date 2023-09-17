@@ -52,7 +52,12 @@
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">entities:</h6>
         <a class="collapse-item" routerLink="/user/entities" routerLinkActive="active">All Entities</a>
-        <a class="collapse-item" routerLink="/user/entities/add" routerLinkActive="active">Add</a>
+
+        
+        <a class="collapse-item" 
+        [routerLink]="['/user/entities/form']"
+        [queryParams]="{mode: 'create'}"
+        routerLinkActive="active">Add</a>
       </div>
     </div>
   </li>

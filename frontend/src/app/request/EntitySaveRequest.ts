@@ -6,7 +6,6 @@ export class EntitySaveRequest{
     constructor(
         public name: string,
         public commercialName: string,
-        public incorporationNumber: number,
         public business: string,
         public phones: Phone[],
         public addresses: Address[] ){}

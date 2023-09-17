@@ -1,36 +1,50 @@
-
-<button class="col-md-6 btn btn-warning" type="button" (click)="openModalAddPhone(content)"> 
-                                    
-    <i class="fa fa-plus"></i>
-    <i class="fa fa-phone"></i>
+<button type="button" class="btn btn-warning btn-icon-split" (click)="openSavePhoneModal(phoneModal)">
+    <span class="icon text-white-50">
+        <i class="fa fa-plus"></i>
+    </span>
+    <span class="text">
+        <i class="fa fa-phone fa-flip-horizontal mr-2"></i>
+        phone
+    </span>
 </button>
 
 
 
-<ng-template #content let-modal>
+
+
+
+<ng-template #phoneModal let-modal>
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">New Friend</h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
+        <h4 class="modal-title" id="modal-basic-title">New Friend</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
     <div class="modal-body">
-        <form #addPhoneForm="ngForm" (ngSubmit)="onSubmit(addPhoneForm)" novalidate>
+        <form #savePhoneForm="ngForm" (ngSubmit)="savePhone(savePhoneForm)" novalidate>
             <div class="row">
                 <div class="form-outline mb-4 col-md-12">
                     <label class="form-label" for="tphContactType">ContactType</label>
-                    <input type="text" name="tphContactType" class="form-control" #tphContactTypeInput="ngModel"
-                        ngModel required />
-                    <span *ngIf="!tphContactTypeInput.valid && tphContactTypeInput.touched"
-                        class="help-block text-danger">invalid
-                        name</span>
+                    <select name="tphContactType" class="form-control form-select" #tphContactTypeInput="ngModel"
+                        ngModel required>
 
+
+                        <option *ngFor="let item of contactTypes;" [value]="item.key">{{item.value}}</option>
+                    </select>
+                    <span *ngIf="!tphContactTypeInput.valid && tphContactTypeInput.touched"
+                        class="help-block text-danger">invalid Contact Type</span>
                 </div>
 
                 <div class="form-outline mb-4 col-md-12">
                     <label class="form-label" for="tphCommunicationType">CommunicationType</label>
-                    <input type="text" name="tphCommunicationType" class="form-control"
-                        #tphCommunicationTypeInput="ngModel" ngModel required />
+
+
+                    <select name="tphCommunicationType" class="form-control form-select"
+                        #tphCommunicationTypeInput="ngModel" ngModel required>
+                        <option *ngFor="let item of communicationType;" [value]="item.key">{{item.value}}</option>
+
+                    </select>
+
                     <span *ngIf="!tphCommunicationTypeInput.valid && tphCommunicationTypeInput.touched"
                         class="help-block text-danger">invalid commercial name </span>
                 </div>
@@ -45,10 +59,10 @@
 
                 <div class="form-outline mb-4  col-md-12">
                     <label class="form-label" for="business">Number</label>
-                    <input type="text" name="tphNumber" class="form-control" #tphNumberInput="ngModel"
-                        ngModel required />
-                    <span *ngIf="!tphNumberInput.valid && tphNumberInput.touched"
-                        class="help-block text-danger">invalid business information</span>
+                    <input type="text" name="tphNumber" class="form-control" #tphNumberInput="ngModel" ngModel
+                        required />
+                    <span *ngIf="!tphNumberInput.valid && tphNumberInput.touched" class="help-block text-danger">invalid
+                        business information</span>
                 </div>
 
                 <div class="form-outline mb-4  col-md-12">
@@ -65,9 +79,9 @@
                 </div>
             </div>
 
-          <div class=" text-center">
-            <button data-dismiss="modal" class="btn btn-success">add phone <i class="fa fa-plus"></i></button>
+            <div class=" text-center">
+                <button data-dismiss="modal" class="btn btn-success">add phone <i class="fa fa-plus"></i></button>
             </div>
-      </form>
+        </form>
     </div>
-  </ng-template>
+</ng-template>

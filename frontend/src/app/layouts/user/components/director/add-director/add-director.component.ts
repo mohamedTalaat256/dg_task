@@ -78,7 +78,6 @@ export class AddDirectorComponent {
     this.payload = new EntitySaveRequest(
       this.createEntityForm.value.name,
       this.createEntityForm.value.commercialName,
-      this.createEntityForm.value.incorporationNumber,
       this.createEntityForm.value.business,
       this.phones,
       this.addresses

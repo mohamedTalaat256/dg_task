@@ -12,7 +12,7 @@ import { ScrollToTopComponent } from './layouts/user/components/global/scroll-to
 import { ProfileComponent } from './layouts/user/components/profile/profile.component';
 import { NgbCollapse, NgbCollapseModule, NgbDatepickerModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AllEntitiesComponent } from './layouts/user/components/entity/all-entities/all-entities.component';
-import { AddEntityComponent } from './layouts/user/components/entity/add-entity/add-entity.component';
+import { SaveEntityComponent } from './layouts/user/components/entity/save-entity/save-entity.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './layouts/auth/components/login/login.component';
 import { RegisterComponent } from './layouts/auth/components/register/register.component';
@@ -24,12 +24,14 @@ import { UserRoutingModule } from './layouts/user/user-routing.module';
 import { FormsModule } from '@angular/forms';
 import { DemoNumber } from './pips/demoNumber.pipe';
 import { AddDirectorComponent } from './layouts/user/components/director/add-director/add-director.component';
-import { AddPhoneModalComponent } from './layouts/user/components/global/add-phone-modal/add-phone-modal.component';
-import { EditEntityComponent } from './layouts/user/components/entity/edit-entity/edit-entity.component';
+import { SavePhoneModalComponent } from './layouts/user/components/global/save-phone-modal/save-phone-modal.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AuthInterceptor } from './service/auth.interceptor';
 
 import { provideToastr } from 'ngx-toastr';
+import { PhoneCardComponent } from './layouts/user/components/global/phone-card/phone-card.component';
+import { SaveAddressModalComponent } from './layouts/user/components/global/save-address-modal/save-address-modal.component';
+import { AddressCardComponent } from './layouts/user/components/global/address-card/address-card.component';
 
 
 @NgModule({
@@ -43,15 +45,17 @@ import { provideToastr } from 'ngx-toastr';
         ProfileComponent,
         SideNavbarComponent,
         AllEntitiesComponent,
-        AddEntityComponent,
+        SaveEntityComponent,
         LoginComponent,
         RegisterComponent,
         AuthComponent,
         UserComponent,
         AddDirectorComponent,
-        AddPhoneModalComponent,
-        EditEntityComponent,
-        PageNotFoundComponent
+        SavePhoneModalComponent,
+        PageNotFoundComponent,
+        PhoneCardComponent,
+        SaveAddressModalComponent,
+        AddressCardComponent
     ],
     providers: [
 

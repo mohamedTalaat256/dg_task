@@ -96,8 +96,8 @@ public class EntityService implements TEntityI {
 
 
     @Override
-    public List<EntityDto> findEntityByNameContains(String name) {
-        List<TEntity> tEntityList = entityRepository.findByNameContains(name);
+    public List<EntityDto> findEntityByNameContainsOrCommercialNameContains(String name, String commercialName) {
+        List<TEntity> tEntityList = entityRepository.findEntityByNameContainsOrCommercialNameContains(name, commercialName);
 
         return  entityToDto.getEntities(tEntityList);
     }

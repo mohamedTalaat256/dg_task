@@ -36,9 +36,9 @@ public class EntityController {
         return AppResponse.generateResponse("entity found", HttpStatus.OK, entityService.findEntityById(id), true);
     }
 
-    @GetMapping("/entities/search/{name}")
-    public ResponseEntity<Object> findByNameContains(@PathVariable String name){
-        return AppResponse.generateResponse("entity found", HttpStatus.OK, entityService.findEntityByNameContains(name), true);
+    @GetMapping("/entities/search")
+    public ResponseEntity<Object> findByNameContains(@RequestParam String name, @RequestParam String commercialName){
+        return AppResponse.generateResponse("entity found", HttpStatus.OK, entityService.findEntityByNameContainsOrCommercialNameContains(name, commercialName), true);
     }
 
     @PostMapping("/entities")

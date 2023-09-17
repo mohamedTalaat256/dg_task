@@ -7,7 +7,6 @@ export class Entity{
         public id: number,
         public name: string,
         public commercialName: string,
-        public incorporationNumber: number,
         public business: string,
         public phones: Phone[],
         public addresses: Address[],

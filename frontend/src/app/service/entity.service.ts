@@ -19,8 +19,8 @@ export class EntityService {
     return this.http.get(baseURL+'/entities/'+ id )
   }
 
-  searchEntity(searchText: string): Observable<any> {
-    return this.http.get(baseURL+'/entities/search/'+ searchText )
+  searchEntity(searchName: string, searchCommercialName: string): Observable<any> {
+    return this.http.get<any>(baseURL+'/entities/search?name='+searchName+'&commercialName='+searchCommercialName)
   }
   public save(requestbody: EntitySaveRequest): Observable<any> {
     return this.http.post<any>(baseURL+'/entities', requestbody);

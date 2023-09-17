@@ -11,7 +11,7 @@
         <div class="col-md-4 d-flex justify-content-center">
             <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 w-100 navbar-search">
                 <div class="input-group">
-                  <input type="text" [(ngModel)]="searchText" (keyup)="searchEntities()" name="searchText" class="form-control bg-light border-0 small" placeholder="Search for entity"  >
+                  <input type="text" [(ngModel)]="searchText" (keyup)="searchInResultEntities()" name="searchText" class="form-control bg-light border-0 small" placeholder="Search for entity"  >
                   <div class="input-group-append">
                     <button class="btn btn-primary" type="button">
                       <i class="fas fa-search fa-sm"></i>
@@ -21,13 +21,40 @@
               </form>
         </div>
         <div class="col-md-4 d-flex justify-content-end">
-            <button routerLink="/user/entities/add" class="btn btn-success p-2 mr-2">New Entity<i class="fa fa-puls"></i>
+            <button 
+                [routerLink]="['/user/entities/form']"
+                [queryParams]="{
+                    mode:'create'
+                }" 
+                class="btn btn-success p-2 mr-2 ">New Entity<i class="fa fa-puls"></i>
             </button>
         </div>
     </div>
     
     
     <div class="rounded-lg shadow min-height-600">
+        
+        <div class="row p-3 d-flex justify-content-center">
+            <div class="form-group col-md-2">
+                <label class="form-label">Name</label>
+                <input [(ngModel)]="searchName" type="text" name="searchName" class="form-control" >
+            </div>
+
+            <div class="form-group col-md-2">
+                <label class="form-label">commercia Name</label>
+                <input [(ngModel)]="searchCommercialName" type="text" name="searchCommercialName" class="form-control" >
+            </div>
+
+            <div class="form-group col-md-2">
+                <label class="form-label">Phone</label>
+                <input [(ngModel)]="searchPhone" type="text" name="searchPhone" class="form-control" >
+            </div>
+            <div class="form-group col-md-2">
+                <label class="form-label">search</label>
+                <button type="button" class="btn btn-primary form-control" (click)="search()">search</button>
+            </div>
+            
+        </div>
         <table class="table  p-3 mb-5 bg-white">
             <thead class="">
                 <tr class="text-uppercase">
@@ -36,12 +63,11 @@
                     <th>commercia lName</th>
                     <th>business</th>
                     <th>phones</th>
-                    <!-- <th>addresses</th> -->
                     <th>action</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let entity of entities;">  
+                <tr *ngFor="let entity of filterdEntities;">  
                     <td>{{entity.id}}</td>  
                     <td>{{entity.name}}</td>  
                     <td>{{entity.commercialName}}</td>  
@@ -60,7 +86,14 @@
                     </td> -->
                     
                     <td>
-                        <a [routerLink]="['/user/entities/',entity.id,'edit' ]" class="btn btn-sm btn-primary p-2 mr-2" ><i class="fa fa-edit"></i></a>
+                        <a 
+                        [routerLink]="['/user/entities/form']"
+                        [queryParams]="{
+                            mode: 'edit',
+                            entityId: entity.id
+                        }"
+                        
+                        class="btn btn-sm btn-primary p-2 mr-2" ><i class="fa fa-edit"></i></a>
                         <button class="btn btn-sm btn-danger p-2" (click)="deleteEntity(entity.id)"><i class="fa fa-trash"></i></button>
                     </td> 
                 </tr>  
@@ -72,21 +105,29 @@
     <div class="row d-flex justify-content-start mt-2">
         <div class="col-md-6 ">
             
-            <button  (click)="getPage(0)" class="col-md-1 btn btn-sm btn-secondary mr-1">
+            <button  (click)="getPage(0)" class="btn  btn-light mr-1">
                 <i class="fa fa-angle-left"></i>
             </button>
-            <button *ngFor="let i of totalPages | demoNumber" (click)="changePageNum(i)" class="col-md-1 btn btn-sm  mr-1"
+
+
+
+            <button *ngFor="let i of totalPages | demoNumber" (click)="changePageNum(i)" class="btn  mr-1"
                 [ngClass]="{
-                    'btn-outline-primary':  i!==pageNum,
-                    'btn-primary': i===pageNum,
+                    'btn-shadow' : i===pageNum,
                 }"
-            >
+                >
                 {{i+1}}
             </button>
-            <button  (click)="getPage(pageNum+1)" class="col-md-1 btn btn-sm btn-secondary mr-1">
+            
+            
+            
+            
+            
+            
+            <button  (click)="getPage(pageNum+1)" class="btn btn-light mr-1">
                 <i class="fa fa-angle-right"></i>
             </button>
-            <select  [(ngModel)]="pageSize" (change)="changePageSize(pageSize)" name="pageNum" class=" btn btn-sm btn-outline-secondary col-md-1">
+            <select  [(ngModel)]="pageSize" (change)="changePageSize(pageSize)" name="pageNum" class=" btn btn-outline-secondary col-md-1">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
