@@ -36,8 +36,7 @@ public class EntityService implements TEntityI {
                entity.getCommercialName(),
                entity.getBusiness(),
                entityToDto.getPhonesDto(entity.getPhones()),
-               entityToDto.getAddressesDto(entity.getAddresses()),
-               entityToDto.getDirectors(entity.getDirectors())
+               entityToDto.getAddressesDto(entity.getAddresses())
        ));
     }
 
@@ -55,7 +54,7 @@ public class EntityService implements TEntityI {
                     .commercialName(entityDto.getCommercialName())
                     .addresses(dtoToEntity.getAddresses(entityDto.getAddresses()))
                     .phones(dtoToEntity.getPhones(entityDto.getPhones()))
-                    .directors(dtoToEntity.getDirectors(entityDto.getDirectors()))
+                    .directors(new ArrayList<>())
                     .build();
 
             entityRepository.save(newEntity);
@@ -99,7 +98,7 @@ public class EntityService implements TEntityI {
     public List<EntityDto> findEntityByNameContainsOrCommercialNameContains(String name, String commercialName) {
         List<TEntity> tEntityList = entityRepository.findEntityByNameContainsOrCommercialNameContains(name, commercialName);
 
-        return  entityToDto.getEntities(tEntityList);
+        return  entityToDto.toEntities(tEntityList);
     }
 
 

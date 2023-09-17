@@ -3,6 +3,7 @@ package com.example.dg_task.controller;
 
 import com.example.dg_task.DTO.PersonSaveDto;
 import com.example.dg_task.serviceImpl.PersonService;
+import com.example.dg_task.utilis.AppResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,7 +19,7 @@ public class PersonController {
 
     @GetMapping("/persons")
     public ResponseEntity<Object> all(){
-        return new ResponseEntity<> ( personService.all(), HttpStatus.OK);
+        return AppResponse.generateResponse("success", HttpStatus.OK, personService.all(), true);
     }
 
     @PostMapping("/persons")

@@ -23,7 +23,6 @@ import { AuthRoutingModule } from './layouts/auth/auth-routing.module';
 import { UserRoutingModule } from './layouts/user/user-routing.module';
 import { FormsModule } from '@angular/forms';
 import { DemoNumber } from './pips/demoNumber.pipe';
-import { AddDirectorComponent } from './layouts/user/components/director/add-director/add-director.component';
 import { SavePhoneModalComponent } from './layouts/user/components/global/save-phone-modal/save-phone-modal.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AuthInterceptor } from './service/auth.interceptor';
@@ -32,6 +31,8 @@ import { provideToastr } from 'ngx-toastr';
 import { PhoneCardComponent } from './layouts/user/components/global/phone-card/phone-card.component';
 import { SaveAddressModalComponent } from './layouts/user/components/global/save-address-modal/save-address-modal.component';
 import { AddressCardComponent } from './layouts/user/components/global/address-card/address-card.component';
+import { SaveDirectorComponent } from './layouts/user/components/director/save-director/save-director.component';
+import { AllDirectorsComponent } from './layouts/user/components/director/all-directors/all-directors.component';
 
 
 @NgModule({
@@ -50,12 +51,13 @@ import { AddressCardComponent } from './layouts/user/components/global/address-c
         RegisterComponent,
         AuthComponent,
         UserComponent,
-        AddDirectorComponent,
         SavePhoneModalComponent,
         PageNotFoundComponent,
         PhoneCardComponent,
         SaveAddressModalComponent,
-        AddressCardComponent
+        AddressCardComponent,
+        SaveDirectorComponent,
+        AllDirectorsComponent
     ],
     providers: [
 

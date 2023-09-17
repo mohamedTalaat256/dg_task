@@ -1,0 +1,78 @@
+
+
+<div class="p-3">
+    <div class="row  my-3">
+        <div class="col-md-4">
+            <h3 class="">Directors</h3>
+
+
+        
+        </div>
+        <div class="col-md-4 d-flex justify-content-center">
+            <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 w-100 navbar-search">
+                <div class="input-group">
+                  <input type="text" [(ngModel)]="searchText" name="searchText" class="form-control bg-light border-0 small" placeholder="Search for entity"  >
+                  <div class="input-group-append">
+                    <button class="btn btn-primary" type="button">
+                      <i class="fas fa-search fa-sm"></i>
+                    </button>
+                  </div>
+                </div>
+              </form>
+        </div>
+        <div class="col-md-4 d-flex justify-content-end">
+            <button 
+                [routerLink]="['/user/directors/save']"
+                [queryParams]="{
+                    mode:'create'
+                }" 
+                class="btn btn-success p-2 mr-2 ">New Person<i class="fa fa-puls"></i>
+            </button>
+        </div>
+    </div>
+    
+    
+    <div class="rounded-lg shadow min-height-600">
+        
+      
+        
+        <table class="table  p-3 mb-5 bg-white">
+            <thead class="">
+                <tr class="text-uppercase">
+                    <th>id</th>
+                    <th>name</th>
+                    <th>ssn</th>
+                    <th>email</th>
+                    <th>passportNumber</th>
+                    <th>action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let director of directors;">  
+                    <td>{{director.id}}</td>  
+                    <td>{{director.title+': '+ director.firstName+' '+ director.lastName}}</td>  
+                    <td>{{director.ssn}}</td>  
+                    <td>{{director.email.emailAddress}}</td> 
+                    <td>
+                        {{director.passportNumber.passportCountry}}
+                        {{director.passportNumber.passportNumber}} </td>
+                    <td>
+                      <!--   <a 
+                        [routerLink]="['/user/entities/form']"
+                        [queryParams]="{
+                            mode: 'edit',
+                            entityId: entity.id
+                        }"
+                        
+                        class="btn btn-sm btn-primary p-2 mr-2" ><i class="fa fa-edit"></i></a>
+                        <button class="btn btn-sm btn-danger p-2" (click)="deleteEntity(entity.id)"><i class="fa fa-trash"></i></button> -->
+                    </td> 
+                </tr>  
+            </tbody>
+        </table>
+    
+    </div>
+  
+    
+    
+</div>

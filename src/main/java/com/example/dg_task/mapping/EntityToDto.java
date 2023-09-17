@@ -1,9 +1,6 @@
 package com.example.dg_task.mapping;
 
-import com.example.dg_task.DTO.AddressDto;
-import com.example.dg_task.DTO.EntityDto;
-import com.example.dg_task.DTO.PersonDto;
-import com.example.dg_task.DTO.PhoneDto;
+import com.example.dg_task.DTO.*;
 import com.example.dg_task.entity.Address;
 import com.example.dg_task.entity.Person;
 import com.example.dg_task.entity.Phone;
@@ -79,11 +76,27 @@ public class EntityToDto {
     }
 
 
-    public List<EntityDto> getEntities(List<TEntity> tEntityList){
+    public List<EntityDto> toEntities(List<TEntity> tEntityList){
         List<EntityDto> entityDtoList = new ArrayList<>();
 
         for (TEntity item : tEntityList){
             entityDtoList.add(new EntityDto(
+                    item.getId(),
+                    item.getName(),
+                    item.getCommercialName(),
+                    item.getBusiness(),
+                    getPhonesDto(item.getPhones()),
+                    getAddressesDto(item.getAddresses())
+            ));
+        }
+        return entityDtoList;
+    }
+
+    public List<EntityWithDirectorsDto> toEntitiesWithDirectors(List<TEntity> tEntityList){
+        List<EntityWithDirectorsDto> entityDtoList = new ArrayList<>();
+
+        for (TEntity item : tEntityList){
+            entityDtoList.add(new EntityWithDirectorsDto(
                     item.getId(),
                     item.getName(),
                     item.getCommercialName(),
@@ -95,6 +108,5 @@ public class EntityToDto {
         }
         return entityDtoList;
     }
-
 
 }

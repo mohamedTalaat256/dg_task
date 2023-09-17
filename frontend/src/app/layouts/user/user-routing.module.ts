@@ -4,9 +4,9 @@ import { AllEntitiesComponent } from './components/entity/all-entities/all-entit
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { UserComponent } from './user.component';
 import { SaveEntityComponent } from './components/entity/save-entity/save-entity.component';
-import { SavePhoneModalComponent } from './components/global/save-phone-modal/save-phone-modal.component';
 import { PageNotFoundComponent } from 'src/app/page-not-found/page-not-found.component';
-import { AddDirectorComponent } from './components/director/add-director/add-director.component';
+import { SaveDirectorComponent } from './components/director/save-director/save-director.component';
+import { AllDirectorsComponent } from './components/director/all-directors/all-directors.component';
 
 
 const routes: Routes = [
@@ -26,8 +26,8 @@ const routes: Routes = [
 
 
       /* directors */
-      {path:'directors', component: AllEntitiesComponent},
-      {path:'directors/add', component: AddDirectorComponent},
+      {path:'directors', component: AllDirectorsComponent},
+      {path:'directors/save', component: SaveDirectorComponent},
 
 
       { path: '404',  component: PageNotFoundComponent },

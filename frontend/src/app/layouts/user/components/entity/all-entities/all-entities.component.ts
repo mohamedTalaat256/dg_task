@@ -67,19 +67,10 @@ export class AllEntitiesComponent implements OnInit {
   searchInResultEntities() {
     this.filterdEntities = this.filterdEntities.filter(
       entity=> entity.name.includes(this.searchText));
-
       if(this.searchText==''){
         this.filterdEntities = this.entities;
       }
-
       console.log(this.entities);
-    /* 
-    
-    this.entityService.searchEntity(this.searchText).subscribe(
-      response => {
-        this.entities = response.data;
-      }
-    ); */
   }
 
 

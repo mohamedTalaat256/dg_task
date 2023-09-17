@@ -63,7 +63,10 @@
                         <div class="row">
                             <h3 class="col-md-6">Phones</h3>
                             <div class="col-md-6 d-flex justify-content-end">
-                                <save-phone-modal (savePhoneToEntityEvent)="savePhone($event)"></save-phone-modal>
+                                <save-phone-modal 
+                                (savePhoneToEntityEvent)="savePhone($event)"
+                                [modelName]="'entity'"
+                                ></save-phone-modal>
                             </div>
                         </div>
                     </div>
@@ -82,7 +85,10 @@
                         <div class="row">
                             <h3 class="col-md-6">Addresses</h3>
                             <div class="col-md-6 d-flex justify-content-end">
-                                <save-address-modal (saveAddressToEntityEvent)="saveAddress($event)"></save-address-modal>
+                                <save-address-modal (saveAddressToEntityEvent)="saveAddress($event)"
+                                [modelName]="'entity'"
+                                
+                                ></save-address-modal>
                             </div>
                         </div>
                     </div>

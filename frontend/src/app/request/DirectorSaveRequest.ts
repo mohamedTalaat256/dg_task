@@ -1,12 +1,11 @@
-import { Address } from "./address.model";
-import { Email } from "./email.model";
-import { PassportNumber } from "./passportNumber.model";
-import { Phone } from "./phone.model";
+import { Address } from "../model/address.model";
+import { Email } from "../model/email.model";
+import { PassportNumber } from "../model/passportNumber.model";
+import { Phone } from "../model/phone.model";
 
-export class Person{
+
+export class DirectorSaveRequest{
     constructor(
-        
-        public id: number,
         public gender: string,
         public title: string,
         public firstName: string,
@@ -16,5 +15,7 @@ export class Person{
         public email: Email,
         public phones: Phone[],
         public addresses: Address[]
-    ){}
+        ){}
 }
+
+

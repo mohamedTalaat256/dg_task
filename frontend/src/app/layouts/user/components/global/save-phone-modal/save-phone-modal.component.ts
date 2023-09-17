@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Pair } from 'src/app/model/pair.model';
@@ -16,6 +16,7 @@ export class SavePhoneModalComponent implements OnInit{
   
   contactTypes: Pair[] = [];
   communicationType: Pair[] = [];
+  phone: Phone;
 
   ngOnInit(): void {
     this.getContactType();
@@ -35,8 +36,20 @@ export class SavePhoneModalComponent implements OnInit{
   }
 
 
+
+  @Input()
+  modelName: string='';
+
+
+
+
+
   @Output()
   savePhoneToEntityEvent: EventEmitter<Phone> = new EventEmitter<Phone>();
+
+
+  @Output()
+  savePhoneToDirectorEvent: EventEmitter<Phone> = new EventEmitter<Phone>();
 
 
   openSavePhoneModal(content: any) {
@@ -45,16 +58,30 @@ export class SavePhoneModalComponent implements OnInit{
  
   savePhone(savePhoneForm: NgForm) {
 
-    this.savePhoneToEntityEvent.emit(
-      new Phone(
-        savePhoneForm.value.tphContactType,
-        savePhoneForm.value.tphCommunicationType,
-        savePhoneForm.value.tphCountryPrefix,
-        savePhoneForm.value.tphNumber,
-        savePhoneForm.value.tphExtension,
-        savePhoneForm.value.comments,
-      ));
 
+    this.phone = new Phone(
+      savePhoneForm.value.tphContactType,
+      savePhoneForm.value.tphCommunicationType,
+      savePhoneForm.value.tphCountryPrefix,
+      savePhoneForm.value.tphNumber,
+      savePhoneForm.value.tphExtension,
+      savePhoneForm.value.comments,
+    )
+
+
+    if(this.modelName === 'entity'){
+
+      this.savePhoneToEntityEvent.emit(this.phone);
+    
+    }else if(this.modelName === 'director'){
+
+      this.savePhoneToDirectorEvent.emit(this.phone);
+      
+    }
+
+
+
+    
       this.modalService.dismissAll();  
   }
 

@@ -15,7 +15,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class EntityDto {
+public class EntityWithDirectorsDto {
 
 
     private Long id;
@@ -25,11 +25,11 @@ public class EntityDto {
     @Length(min = 1, max = 255)
     private String name;
 
-
     private String commercialName;
     private String business;
     private List<PhoneDto> phones = new ArrayList<>();
     private List<AddressDto> addresses = new ArrayList<>();
+    private List<PersonDto> directors = new ArrayList<>();
 
 
 }

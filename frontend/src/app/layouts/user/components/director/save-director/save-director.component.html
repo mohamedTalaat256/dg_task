@@ -1,0 +1,173 @@
+<div class="p-3">
+    <div class="row  my-3">
+        <div class="col-md-4">
+            <h3 class="">{{title}}</h3>
+
+        </div>
+        <div class="col-md-4 d-flex justify-content-center">
+            <!--  -->
+        </div>
+        <div class="col-md-4 d-flex justify-content-end">
+            <button routerLink="/user/entities" class="btn btn-info p-2 mr-2">Back<i class="fa fa-puls"></i>
+            </button>
+        </div>
+    </div>
+
+
+
+    <div class="tab-content mt-5">
+        <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
+
+            <form (ngSubmit)="onSubmit()" #saveDirectorForm="ngForm">
+                <!-- basic information -->
+                <div class="card">
+                    <div class="card-header p-3 bg-primary text-light">
+                        <h3>Information</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+
+
+                            <div class="form-outline mb-4 col-md-1">
+                                <label class="form-label" for="title">title</label>
+                                <input type="text" name="title" [(ngModel)]="director.firstName" class="form-control"
+                                    #titleInput="ngModel" ngModel required />
+                                <span *ngIf="!titleInput.valid && titleInput.touched"
+                                    class="help-block text-danger">invalid title</span>
+                            </div>
+
+
+
+                            <div class="form-outline mb-4 col-md-1">
+                                <label class="form-label" for="gender">gender</label>
+                                <select name="gender" class="form-control form-select" #genderInput="ngModel" ngModel
+                                    required>
+                                    <option *ngFor="let item of genders;" [value]="item.key">{{item.value}}</option>
+                                </select>
+                                <span *ngIf="!genderInput.valid && genderInput.touched"
+                                    class="help-block text-danger">invalid gender</span>
+                            </div>
+
+                            <div class="form-outline mb-4 col-md-2">
+                                <label class="form-label" for="name">firstName</label>
+                                <input type="text" name="firstName" [(ngModel)]="director.firstName"
+                                    class="form-control" #firstNameInput="ngModel" ngModel required />
+                                <span *ngIf="!firstNameInput.valid && firstNameInput.touched"
+                                    class="help-block text-danger">invalid firstName</span>
+                            </div>
+                            
+
+                            <div class="form-outline mb-4 col-md-2">
+                                <label class="form-label" for="name">lastName</label>
+                                <input type="text" name="lastName" [(ngModel)]="director.lastName" class="form-control"
+                                    #lastNameInput="ngModel" ngModel required />
+                                <span *ngIf="!lastNameInput.valid && lastNameInput.touched"
+                                    class="help-block text-danger">invalid lastName</span>
+                            </div>
+
+
+                            <div class="form-outline mb-4 col-md-2">
+                                <label class="form-label" for="email">email</label>
+                                <input type="text" name="email" [(ngModel)]="director.email" class="form-control"
+                                    #emailInput="ngModel" ngModel required email />
+                                <span *ngIf="!emailInput.valid && emailInput.touched"
+                                    class="help-block text-danger">invalid lastName</span>
+                            </div>
+
+
+                            <div class="form-outline mb-4 col-md-2">
+                                <label class="form-label" for="passportNumber">passportNumber</label>
+                                <input type="text" name="passportNumber" [(ngModel)]="director.passportNumber" class="form-control"
+                                    #passportNumberInput="ngModel" ngModel required />
+                                <span *ngIf="!passportNumberInput.valid && passportNumberInput.touched"
+                                    class="help-block text-danger">invalid passportNumber</span>
+                            </div>
+
+
+
+                          
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!-- Phones  -->
+                <div class="card my-2">
+                    <div class="card-header p-3">
+                        <div class="row">
+                            <h3 class="col-md-6">Phones</h3>
+                            <div class="col-md-6 d-flex justify-content-end">
+                                <save-phone-modal 
+                                    (savePhoneToDirectorEvent)="savePhone($event)"
+
+                                    [modelName]="'director'"
+                                    
+                                    ></save-phone-modal>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <div class="card-body text-dark row">
+                        <div *ngFor="let phone of director.phones;" class="col-xl-3 col-md-6 mb-4">
+                            <app-phone-card (deleteEntityPhoneEvent)="deletePhone(phone.tphNumber)"
+                                [phone]="phone"></app-phone-card>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Address -->
+
+                <div class="card my-2">
+                    <div class="card-header p-3">
+                        <div class="row">
+                            <h3 class="col-md-6">Addresses</h3>
+                            <div class="col-md-6 d-flex justify-content-end">
+                                <save-address-modal
+                                    (saveAddressToDirectorEvent)="saveAddress($event)"
+                                    [modelName]="'director'"
+                                    ></save-address-modal>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body text-dark row">
+                        <div *ngFor="let address of director.addresses;" class="col-xl-3 col-md-6 mb-4">
+                            <app-address-card (deleteEntityAddressEvent)="deleteAddress(address.address, address.city)"
+                                [address]="address"></app-address-card>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div *ngIf="isLoading" class="d-flex justify-content-center">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-center row  ">
+                    <button [disabled]="!saveDirectorForm.valid" type="submit"
+                        class=" col-md-2 btn btn-primary mb-3">save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
