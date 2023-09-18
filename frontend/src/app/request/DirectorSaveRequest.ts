@@ -14,7 +14,9 @@ export class DirectorSaveRequest{
         public passportNumber: PassportNumber,
         public email: Email,
         public phones: Phone[],
-        public addresses: Address[]
+        public addresses: Address[],
+        public entityId,
+        
         ){}
 }
 

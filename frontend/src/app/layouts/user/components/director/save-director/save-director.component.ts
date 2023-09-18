@@ -12,53 +12,58 @@ import { Subscription } from 'rxjs';
 import { Person } from 'src/app/model/person.model';
 import { DirectorService } from 'src/app/service/director.service';
 import { DirectorSaveRequest } from 'src/app/request/DirectorSaveRequest';
+import { PassportNumber } from 'src/app/model/passportNumber.model';
+import { Email } from 'src/app/model/email.model';
+import { Entity } from 'src/app/model/entity.model';
 
 @Component({
   selector: 'save-director',
   templateUrl: './save-director.component.html',
   styleUrls: ['./save-director.component.css']
 })
-export class SaveDirectorComponent implements OnInit , OnDestroy {
+export class SaveDirectorComponent implements OnInit, OnDestroy {
   [x: string]: any;
 
 
   title: string;
   componentMode: string;
   directorId: number;
-  director: Person;
+  director: Person = new Person(null, null, null, null, null, null, new PassportNumber(null, null), new Email(null) , [], [],null);
   paramSubscription: Subscription;
   payload: DirectorSaveRequest;
   isLoading: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
-    private toastr: ToastrService ,
-    private selectOptionsService :SelectOprionService,
+    private toastr: ToastrService,
+    private selectOptionsService: SelectOprionService,
     private directorService: DirectorService,
-    private entityService: EntityService) { }
+    private entityService: EntityService
+    ) { }
 
   @ViewChild('saveDirectorForm') saveDirectorForm: NgForm;
 
   genders: Pair[] = [];
-countriesCodes: Pair[] = [];
+  countriesCodes: Pair[] = [];
+  entities: Entity[];
 
   ngOnInit(): void {
 
     this.paramSubscription = this.route.queryParams.subscribe(
-      (qParams: Params)=>{
-        if(qParams['mode'] === 'create'){
+      (qParams: Params) => {
+        if (qParams['mode'] === 'create') {
           this.componentMode = 'create';
           this.title = 'Create New Director';
-          this.director = new Person(null,'', '','','','',null,null,[],[]);
-        }else{
+          
+        } else if( qParams['mode'] === 'edit') {
 
           this.componentMode = 'edit';
-          this.title = 'Director Entity';
+          this.title = 'Update Director Entity';
           this.directorId = qParams['directorId'];
 
 
           this.directorService.findById(this.directorId).subscribe({
-            next:(response: AppResponse)=>{
+            next: (response: AppResponse) => {
               this.director = response.data;
             }
           });
@@ -67,26 +72,34 @@ countriesCodes: Pair[] = [];
     );
 
     this.getGenders();
-
     this.getCountriesCodes();
+    this.getEntities();
   }
 
 
-  getGenders(){
-    this.selectOptionsService.getGenders().subscribe(response=>{
+  getGenders() {
+    this.selectOptionsService.getGenders().subscribe(response => {
       this.genders = response.data;
     })
   }
 
-
-  getCountriesCodes(){
-    this.selectOptionsService.getCountriesCodes().subscribe(response=>{
+  getCountriesCodes() {
+    this.selectOptionsService.getCountriesCodes().subscribe(response => {
       this.countriesCodes = response.data;
+    })
+  }
+
+  getEntities(){
+    this.entityService.selectNameFromEntity().subscribe(response => {
+      this.entities = response.data;
     })
   }
 
   onSubmit() {
     this.isLoading = true;
+
+    //console.log(this.director);
+
     this.payload = new DirectorSaveRequest(
       this.director.gender,
       this.director.title,
@@ -97,76 +110,69 @@ countriesCodes: Pair[] = [];
       this.director.email,
       this.director.phones,
       this.director.addresses,
+      this.director.entityId
     );
 
-    
-    if(this.componentMode === 'create'){
 
-      this.saveEntity(this.payload);
-    }else{
-      this.updateEntity(this.payload);
+    if (this.componentMode === 'create') {
+
+      this.saveDirector(this.payload);
+    } else {
+      this.updateDirector(this.payload);
 
     }
   }
 
+  updateDirector(request: DirectorSaveRequest) {
 
 
-
-  updateEntity(request: DirectorSaveRequest){
-   
-
-  this.directorService.update(this.director.id, request)
-      .subscribe(
-        {
-          next:(response: AppResponse)=>{
-            this.isLoading = false;
-            this.toastr.success(response.message);
-          },
-          error:(error: Error)=>{
-            this.toastr.error(error.message);
-
-          }
-        });
-  }
-
-  saveEntity(request: DirectorSaveRequest){
-    this.directorService.save(request)
-    .subscribe(
+    this.directorService.update(this.director.id, request).subscribe(
       {
-        next:(response: AppResponse)=>{
+        next: (response: AppResponse) => {
           this.isLoading = false;
           this.toastr.success(response.message);
         },
-        error:(error: Error)=>{
+        error: (error: Error) => {
           this.toastr.error(error.message);
 
         }
       });
   }
 
-  savePhone(phone: Phone){
-    
+  saveDirector(request: DirectorSaveRequest) {
+    this.directorService.save(request)
+      .subscribe(
+        {
+          next: (response: AppResponse) => {
+            this.isLoading = false;
+            this.toastr.success(response.message);
+          },
+          error: (error: Error) => {
+            this.toastr.error(error.message);
+
+          }
+        });
+  }
+
+  savePhone(phone: Phone) {
+
     this.director.phones.push(phone);
   }
 
-  saveAddress(address: Address){
+  saveAddress(address: Address) {
     this.director.addresses.push(address);
   }
 
-  
   ngOnDestroy(): void {
     this.paramSubscription.unsubscribe();
   }
 
-
-
-  deletePhone(phoneNumber: any){
-    this.director.phones = this.director.phones.filter(phone=> phone.tphNumber !== phoneNumber);
+  deletePhone(phoneNumber: any) {
+    this.director.phones = this.director.phones.filter(phone => phone.tphNumber !== phoneNumber);
   }
 
-
-  deleteAddress(address: string, city: string){
-    this.director.addresses = this.director.addresses.filter(i=> i.address !== address && i.city !== city);
+  deleteAddress(address: string, city: string) {
+    this.director.addresses = this.director.addresses.filter(i => i.address !== address && i.city !== city);
   }
 
 }

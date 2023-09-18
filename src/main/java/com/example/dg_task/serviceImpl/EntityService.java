@@ -2,6 +2,7 @@ package com.example.dg_task.serviceImpl;
 
 
 import com.example.dg_task.DTO.EntityDto;
+import com.example.dg_task.DTO.EntityWithNameDto;
 import com.example.dg_task.entity.TEntity;
 import com.example.dg_task.exceptions.DuplicateRecordException;
 import com.example.dg_task.exceptions.RecordNotFoundException;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -108,5 +110,19 @@ public class EntityService implements TEntityI {
     }
 
 
+    @Override
+    public List<EntityWithNameDto> selectNameFromEntities() {
 
+        List<EntityWithNameDto> list = new ArrayList<>();
+
+
+
+        entityRepository.findAll().stream().forEach(entity->
+                list.add( new EntityWithNameDto(entity.getId(), entity.getName())));
+
+
+
+
+        return list;
+    }
 }

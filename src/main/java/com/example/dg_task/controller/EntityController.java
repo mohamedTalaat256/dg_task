@@ -31,6 +31,13 @@ public class EntityController {
         return new ResponseEntity<> ( entityService.findAllEntities(pageNum, pageSize), HttpStatus.OK);
     }
 
+
+    @GetMapping("/entities_with_name")
+    public ResponseEntity<Object> selectNameFromEntity(){
+
+        return AppResponse.generateResponse("success", HttpStatus.OK, entityService.selectNameFromEntities(), true);
+    }
+
     @GetMapping("/entities/{id}")
     public ResponseEntity<Object> findById(@PathVariable Long id){
         return AppResponse.generateResponse("entity found", HttpStatus.OK, entityService.findEntityById(id), true);

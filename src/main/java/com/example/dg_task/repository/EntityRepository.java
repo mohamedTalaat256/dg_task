@@ -1,5 +1,6 @@
 package com.example.dg_task.repository;
 
+import com.example.dg_task.DTO.EntityWithNameDto;
 import com.example.dg_task.entity.TEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,6 +17,7 @@ public interface EntityRepository extends JpaRepository<TEntity, Long> {
 
 
      List<TEntity> findAll();
+
 
      Page<TEntity> findAll(Pageable page);
      List<TEntity> findEntityByNameContainsOrCommercialNameContains(String name ,String commercialName);

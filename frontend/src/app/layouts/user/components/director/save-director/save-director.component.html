@@ -5,7 +5,7 @@
 
         </div>
         <div class="col-md-4 d-flex justify-content-center">
-            <!--  -->
+            
         </div>
         <div class="col-md-4 d-flex justify-content-end">
             <button routerLink="/user/entities" class="btn btn-info p-2 mr-2">Back<i class="fa fa-puls"></i>
@@ -30,7 +30,7 @@
 
                             <div class="form-outline mb-4 col-md-1">
                                 <label class="form-label" for="title">title</label>
-                                <input type="text" name="title" [(ngModel)]="director.firstName" class="form-control"
+                                <input type="text" name="title" [(ngModel)]="director.title" class="form-control"
                                     #titleInput="ngModel" ngModel required />
                                 <span *ngIf="!titleInput.valid && titleInput.touched"
                                     class="help-block text-danger">invalid title</span>
@@ -40,7 +40,7 @@
 
                             <div class="form-outline mb-4 col-md-1">
                                 <label class="form-label" for="gender">gender</label>
-                                <select name="gender" class="form-control form-select" #genderInput="ngModel" ngModel
+                                <select name="gender" class="form-control form-select" #genderInput="ngModel" [(ngModel)]="director.gender"
                                     required>
                                     <option *ngFor="let item of genders;" [value]="item.key">{{item.value}}</option>
                                 </select>
@@ -65,10 +65,18 @@
                                     class="help-block text-danger">invalid lastName</span>
                             </div>
 
+                            <div class="form-outline mb-4 col-md-2">
+                                <label class="form-label" for="ssn">SSN</label>
+                                <input type="text" name="ssn" [(ngModel)]="director.ssn" class="form-control"
+                                #ssnInput="ngModel" ngModel required />
+                            <span *ngIf="!ssnInput.valid && ssnInput.touched"
+                                class="help-block text-danger">invalid SSN</span>
+                            </div>
+
 
                             <div class="form-outline mb-4 col-md-2">
                                 <label class="form-label" for="email">email</label>
-                                <input type="text" name="email" [(ngModel)]="director.email" class="form-control"
+                                <input type="text" name="email" [(ngModel)]="director.email.emailAddress" class="form-control"
                                     #emailInput="ngModel" ngModel required email />
                                 <span *ngIf="!emailInput.valid && emailInput.touched"
                                     class="help-block text-danger">invalid lastName</span>
@@ -77,15 +85,37 @@
 
                             <div class="form-outline mb-4 col-md-2">
                                 <label class="form-label" for="passportNumber">passportNumber</label>
-                                <input type="text" name="passportNumber" [(ngModel)]="director.passportNumber" class="form-control"
+                                <input type="text" name="passportNumber" [(ngModel)]="director.passportNumber.passportNumber" class="form-control"
                                     #passportNumberInput="ngModel" ngModel required />
                                 <span *ngIf="!passportNumberInput.valid && passportNumberInput.touched"
                                     class="help-block text-danger">invalid passportNumber</span>
                             </div>
 
 
+                            <div class="form-outline mb-4 col-md-2">
+                                <label class="form-label" for="passportCountry">passport Country</label>
+                                <select name="passportCountry" class="form-control form-select" #passportCountryInput="ngModel" [(ngModel)]="director.passportNumber.passportCountry"
+                                    required>
+                                    <option *ngFor="let item of countriesCodes;" [value]="item.key">{{item.value}}</option>
+                                </select>
+                                <span *ngIf="!passportCountryInput.valid && passportCountryInput.touched"
+                                    class="help-block text-danger">invalid passportCountry</span>
+                            </div>
 
-                          
+
+                            <div class="form-outline mb-4 col-md-2">
+                                <label class="form-label" for="passportCountry">Entity</label>
+                                <select name="entityId" class="form-control form-select" #entityIdInput="ngModel" [(ngModel)]="director.entityId"
+                                    required>
+                                    <option *ngFor="let item of entities;" [value]="item.id">{{item.name}}</option>
+                                </select>
+                                <span *ngIf="!entityIdInput.valid && entityIdInput.touched"
+                                    class="help-block text-danger">invalid entity</span>
+                            </div>
+
+
+                            
+                            
 
 
 

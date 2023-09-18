@@ -15,6 +15,12 @@ export class EntityService {
     return this.http.get(baseURL+'/entities?pageNum='+pageNum+'&pageSize='+pageSize)
   }
 
+  selectNameFromEntity(): Observable<any> {
+    return this.http.get(baseURL+'/entities_with_name');
+  }
+
+
+
   findById(id: number): Observable<any> {
     return this.http.get(baseURL+'/entities/'+ id )
   }

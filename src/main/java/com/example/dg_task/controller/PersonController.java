@@ -24,6 +24,6 @@ public class PersonController {
 
     @PostMapping("/persons")
     public ResponseEntity<Object> save(@RequestBody @Valid PersonSaveDto personSaveDto){
-        return new ResponseEntity<> ( personService.save(personSaveDto), HttpStatus.OK);
+        return AppResponse.generateResponse("saved success", HttpStatus.OK,  personService.save(personSaveDto), true);
     }
 }

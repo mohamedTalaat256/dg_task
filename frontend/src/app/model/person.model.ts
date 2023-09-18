@@ -15,6 +15,7 @@ export class Person{
         public passportNumber: PassportNumber,
         public email: Email,
         public phones: Phone[],
-        public addresses: Address[]
+        public addresses: Address[],
+        public entityId: number
     ){}
 }

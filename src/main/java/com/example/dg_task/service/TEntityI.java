@@ -1,6 +1,7 @@
 package com.example.dg_task.service;
 
 import com.example.dg_task.DTO.EntityDto;
+import com.example.dg_task.DTO.EntityWithNameDto;
 import com.example.dg_task.entity.TEntity;
 import org.springframework.data.domain.Page;
 
@@ -12,6 +13,7 @@ public interface TEntityI {
     String saveEntity(EntityDto entityDto);
 
     Optional<TEntity> findEntityById(Long id);
+    List<EntityWithNameDto> selectNameFromEntities();
 
     String updateEntity(Long id,EntityDto entityDto);
 
