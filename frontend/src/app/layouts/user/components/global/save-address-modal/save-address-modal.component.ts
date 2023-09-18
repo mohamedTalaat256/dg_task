@@ -68,15 +68,6 @@ export class SaveAddressModalComponent implements OnInit {
       saveAddressForm.value.comments
     );
 
-
-
-
-
-
-
-
-
-
     
     if(this.modelName === 'entity'){
 
@@ -86,8 +77,6 @@ export class SaveAddressModalComponent implements OnInit {
       this.saveAddressToDirectorEvent.emit(this.address);
     }
 
-    
-
-      this.modalService.dismissAll();  
+    this.modalService.dismissAll();  
   }
 }

@@ -1,0 +1,95 @@
+<div class="container">
+
+  <div class="row justify-content-center" >
+    <div class="col-md-6  my-5 p-5 shadow rounded"  >
+      <h1 class="text-center text-dark my-3">{{loginMode?'Login': 'Signup'}}</h1>
+
+      <form (ngSubmit)="onSubmit()" #authForm="ngForm" [@heightState]="heightState" class="px-2">
+
+        <div *ngIf="!loginMode" class="form-outline mb-4" [@formState]>
+          <label class="form-label" for="name">FullName</label>
+          <input type="text" name="fullName" class="form-control" #fullNameInput="ngModel" ngModel required />
+          <span *ngIf="!fullNameInput.valid && fullNameInput.touched" class="help-block text-danger">invalid Full
+            Name</span>
+
+        </div>
+
+        <div class="form-outline mb-4">
+          <label class="form-label" for="username">Username</label>
+          <input type="text" name="username" class="form-control" #usernameInput="ngModel" ngModel required />
+          <span *ngIf="!usernameInput.valid && usernameInput.touched" class="help-block text-danger">invalid username
+          </span>
+        </div>
+
+        <div *ngIf="!loginMode" class="form-outline mb-4" [@formState]>
+          <label class="form-label" for="email">Email</label>
+          <input type="email" name="email" class="form-control" #emailInput="ngModel" ngModel required email />
+          <span *ngIf="!emailInput.valid && emailInput.touched" class="help-block text-danger">invalid email</span>
+        </div>
+
+
+        <div *ngIf="!loginMode" class="form-outline mb-4" [@formState]>
+          <label class="form-label" for="role">Role</label><br>
+
+          <div class="row form-inline  pl-3">
+            <div class="col form-check d-flex justify-content-start">
+              <input class="form-check-input" type="checkbox" name="USER" (input)="handleRoleChange($event)" ngModel
+                checked>
+              <label class="form-check-label" for="flexCheckDefault">
+                USER
+              </label>
+            </div>
+
+
+            <div class="col form-check d-flex justify-content-start">
+              <input class="form-check-input" type="checkbox" name="ADMIN" (input)="handleRoleChange($event)" ngModel>
+              <label class="form-check-label" for="flexCheckDefault">
+                ADMIN
+              </label>
+            </div>
+          </div>
+
+
+        </div>
+
+        <div class="form-outline mb-4">
+          <label class="form-label" for="password">Password</label>
+          <input type="password" name="password" class="form-control" #passwordInput="ngModel" ngModel required />
+          <span *ngIf="!passwordInput.valid && passwordInput.touched" class="help-block text-danger">invalid
+            password</span>
+        </div>
+
+        <div *ngIf="!loginMode" class="form-outline mb-4" [@formState]>
+          <label class="form-label" for="confirm_password">Repeat password</label>
+          <input type="password" name="confirm_password" class="form-control" #confirmPasswordInput="ngModel" ngModel
+            required />
+          <span
+            *ngIf="!confirmPasswordInput.valid && confirmPasswordInput.touched && confirmPasswordInput.value !== passwordInput.value"
+            class="help-block text-danger">password not matchs</span>
+        </div>
+
+
+        <div *ngIf="isLoading" class="d-flex justify-content-center">
+          <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+
+
+        <button type="submit" class="btn btn-primary btn-block mb-3">{{loginMode? 'Login': 'Signup'}}</button>
+      </form>
+
+
+
+      <div class="text-center mt-3">
+        <p *ngIf="!loginMode">Have Account? <span class="text-primary cursor-pointer"
+            (click)="toggleMode()">login</span></p>
+        <p *ngIf="loginMode">You Don't Have Account? <span class="text-primary cursor-pointer"
+            (click)="toggleMode()">Signup</span></p>
+      </div>
+
+    </div>
+  </div>
+
+
+</div>

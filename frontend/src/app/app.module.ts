@@ -14,8 +14,7 @@ import { NgbCollapse, NgbCollapseModule, NgbDatepickerModule, NgbModule } from '
 import { AllEntitiesComponent } from './layouts/user/components/entity/all-entities/all-entities.component';
 import { SaveEntityComponent } from './layouts/user/components/entity/save-entity/save-entity.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { LoginComponent } from './layouts/auth/components/login/login.component';
-import { RegisterComponent } from './layouts/auth/components/register/register.component';
+import { AuthFormComponent } from './layouts/auth/components/auth-form/auth-form.component';
 import { AuthComponent } from './layouts/auth/auth.component';
 import { UserComponent } from './layouts/user/user.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -47,8 +46,7 @@ import { AllDirectorsComponent } from './layouts/user/components/director/all-di
         SideNavbarComponent,
         AllEntitiesComponent,
         SaveEntityComponent,
-        LoginComponent,
-        RegisterComponent,
+        AuthFormComponent,
         AuthComponent,
         UserComponent,
         SavePhoneModalComponent,
