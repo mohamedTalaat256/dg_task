@@ -28,7 +28,9 @@ export class SaveDirectorComponent implements OnInit, OnDestroy {
   title: string;
   componentMode: string;
   directorId: number;
-  director: Person = new Person(null, null, null, null, null, null, new PassportNumber(null, null), new Email(null) , [], [],null);
+
+  director: Person = new Person(null, null, null, null, null, null,{} as PassportNumber, 
+     {} as Email, [], [], {} as Entity);
   paramSubscription: Subscription;
   payload: DirectorSaveRequest;
   isLoading: boolean = false;
@@ -91,14 +93,13 @@ export class SaveDirectorComponent implements OnInit, OnDestroy {
 
   getEntities(){
     this.entityService.selectNameFromEntity().subscribe(response => {
+      console.log(response);
       this.entities = response.data;
     })
   }
 
   onSubmit() {
     this.isLoading = true;
-
-    //console.log(this.director);
 
     this.payload = new DirectorSaveRequest(
       this.director.gender,
@@ -110,7 +111,7 @@ export class SaveDirectorComponent implements OnInit, OnDestroy {
       this.director.email,
       this.director.phones,
       this.director.addresses,
-      this.director.entityId
+      this.director.entity.id
     );
 
 

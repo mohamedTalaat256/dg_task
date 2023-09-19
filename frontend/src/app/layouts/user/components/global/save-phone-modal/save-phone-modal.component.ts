@@ -9,13 +9,15 @@ import { SelectOprionService } from 'src/app/service/selectOprion.service';
   templateUrl: './save-phone-modal.component.html',
   styleUrls: ['./save-phone-modal.component.css']
 })
-export class SavePhoneModalComponent implements OnInit{
+export class SavePhoneModalComponent implements OnInit {
 
   constructor(private selectOptionsService: SelectOprionService, private modalService: NgbModal) { }
-  
-  
+
+
   contactTypes: Pair[] = [];
   communicationType: Pair[] = [];
+
+
   phone: Phone;
 
   ngOnInit(): void {
@@ -23,22 +25,42 @@ export class SavePhoneModalComponent implements OnInit{
     this.getComunicationTypes();
   }
 
-  getContactType(){
-    this.selectOptionsService.getContactType().subscribe(response=>{
-      this.contactTypes = response.data;
-    })
+  getContactType() {
+
+    if (localStorage.getItem('CONTACT_TYPE') != null) {
+      this.contactTypes = JSON.parse(localStorage.getItem('CONTACT_TYPE'));
+    } else {
+      this.selectOptionsService.getContactType().subscribe(response => {
+        this.contactTypes = response.data;
+        localStorage.setItem('CONTACT_TYPE', JSON.stringify(this.contactTypes));
+      })
+    }
+
+
+
   }
 
-  getComunicationTypes(){
-    this.selectOptionsService.getComunicationTypes().subscribe(response=>{
-      this.communicationType = response.data;
-    })
+  getComunicationTypes() {
+
+
+    if (localStorage.getItem('COMMUNICATION_TYPE') != null) {
+      this.contactTypes = JSON.parse(localStorage.getItem('COMMUNICATION_TYPE'));
+    } else {
+      this.selectOptionsService.getComunicationTypes().subscribe(response => {
+        this.communicationType = response.data;
+        localStorage.setItem('COMMUNICATION_TYPE', JSON.stringify(this.communicationType));
+  
+      })
+    }
+
+
+    
   }
 
 
 
   @Input()
-  modelName: string='';
+  modelName: string = '';
 
 
 
@@ -54,8 +76,8 @@ export class SavePhoneModalComponent implements OnInit{
 
   openSavePhoneModal(content: any) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
-  } 
- 
+  }
+
   savePhone(savePhoneForm: NgForm) {
 
 
@@ -69,22 +91,12 @@ export class SavePhoneModalComponent implements OnInit{
     )
 
 
-    if(this.modelName === 'entity'){
-
+    if (this.modelName === 'entity') {
       this.savePhoneToEntityEvent.emit(this.phone);
-    
-    }else if(this.modelName === 'director'){
-
+    } else if (this.modelName === 'director') {
       this.savePhoneToDirectorEvent.emit(this.phone);
-      
     }
 
-
-
-    
-      this.modalService.dismissAll();  
+    this.modalService.dismissAll();
   }
-
-
-
 }

@@ -17,14 +17,17 @@ import java.util.List;
 @NoArgsConstructor
 public class EntityDto {
 
+    EntityDto(Long id,String name){
+        this.id= id;
+        this.name = name;
+    }
+
 
     private Long id;
-
 
     @NotNull
     @Length(min = 1, max = 255)
     private String name;
-
 
     private String commercialName;
     private String business;

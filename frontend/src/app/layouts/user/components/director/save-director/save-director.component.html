@@ -105,7 +105,7 @@
 
                             <div class="form-outline mb-4 col-md-2">
                                 <label class="form-label" for="passportCountry">Entity</label>
-                                <select name="entityId" class="form-control form-select" #entityIdInput="ngModel" [(ngModel)]="director.entityId"
+                                <select name="entityId" class="form-control form-select" #entityIdInput="ngModel" [(ngModel)]="director.entity.id"
                                     required>
                                     <option *ngFor="let item of entities;" [value]="item.id">{{item.name}}</option>
                                 </select>

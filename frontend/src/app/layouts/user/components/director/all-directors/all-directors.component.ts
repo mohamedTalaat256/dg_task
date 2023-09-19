@@ -38,6 +38,7 @@ export class AllDirectorsComponent implements OnInit {
       next:(response: AppResponse)=>{
         console.log(response);
         this.directors = response.data;
+        
       },
       error:(error: Error)=>{
         this.toastr.error(error.message);

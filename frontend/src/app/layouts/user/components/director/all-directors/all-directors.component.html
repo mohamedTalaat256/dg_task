@@ -44,19 +44,31 @@
                     <th>ssn</th>
                     <th>email</th>
                     <th>passportNumber</th>
+                    <th>entity</th>
                     <th>action</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let director of directors;">  
                     <td>{{director.id}}</td>  
-                    <td>{{director.title+': '+ director.firstName+' '+ director.lastName}}</td>  
+                    <td class="font-weight-bold">
+                        <span class="text-danger">{{director.title+': '}}</span> {{ director.firstName+' '+ director.lastName}}</td>  
                     <td>{{director.ssn}}</td>  
                     <td>{{director.email.emailAddress}}</td> 
                     <td>
-                        {{director.passportNumber.passportCountry}}
-                        {{director.passportNumber.passportNumber}} </td>
+                        <span class="text-success">
+                            {{director.passportNumber.passportCountry}}
+                        </span>
+                        {{director.passportNumber.passportNumber}} 
+                    </td>
                     <td>
+                        <span class="text-primary font-weight-bold">
+                            {{director.entity.name}}
+                        </span>
+                        {{director.entity.commercialName}}
+                    </td>
+                    
+                        <td>
                       <!--   <a 
                         [routerLink]="['/user/entities/form']"
                         [queryParams]="{

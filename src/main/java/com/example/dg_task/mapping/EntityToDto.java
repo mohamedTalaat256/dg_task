@@ -92,6 +92,20 @@ public class EntityToDto {
         return entityDtoList;
     }
 
+    public EntityDto toEntity(TEntity tEntity){
+        List<EntityDto> entityDtoList = new ArrayList<>();
+
+        return new EntityDto(
+                tEntity.getId(),
+                tEntity.getName(),
+                tEntity.getCommercialName(),
+                tEntity.getBusiness(),
+                    getPhonesDto(tEntity.getPhones()),
+                    getAddressesDto(tEntity.getAddresses())
+            );
+    }
+
+
     public List<EntityWithDirectorsDto> toEntitiesWithDirectors(List<TEntity> tEntityList){
         List<EntityWithDirectorsDto> entityDtoList = new ArrayList<>();
 
